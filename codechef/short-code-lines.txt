@@ -1,0 +1,38 @@
+#for split input  
+n = int(input())
+
+for i in range(n):
+    x,y = list(map(int,input().split()))
+
+# for storing split input in a single array
+x = list(map(int,input().split()))
+
+######
+# cook your dish here
+t = int(input())
+for i in range(t):
+    n = int(input())
+    s = input()
+    s = list(s)
+    ans = []
+    for j in range(len(s)):
+        if(s[j] != '.'):
+            ans.append(s[j])
+    
+    
+    for k in range(len(ans)-1):
+        if(ans[0] == "H" and ans[len(ans)-1]=="T"):
+            if((ans[k]=="H" and ans[k+1]=="T") or (ans[k]=="T" and ans[k+1]=="H")):
+                flag = True
+            else:
+                flag = False
+                break
+        else:
+            flag = False    
+            break
+    
+    if(flag):
+        print("Valid")
+    else:
+        print("Invalid")
+   ####

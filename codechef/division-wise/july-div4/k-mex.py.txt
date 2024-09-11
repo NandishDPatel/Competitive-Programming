@@ -1,0 +1,6 @@
+import math
+t = int(input())
+for i in range(t):
+    n,m,k = list(map(int,input().split()))
+    arr = list(int,input().split())
+    print(arr)

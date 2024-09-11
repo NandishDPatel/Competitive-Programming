@@ -1,0 +1,24 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		 Scanner sc = new Scanner(System.in);
+            String inputLine = sc.nextLine();
+            String[] tokens = inputLine.split(" ");
+            int[] numbers = new int[tokens.length];
+            for (int i = 0; i < tokens.length; i++) {
+                numbers[i] = Integer.parseInt(tokens[i]);
+            }
+            sc.close();
+
+            if(numbers[0]-numbers[1]>=18){
+                System.out.println("RCB");
+            } else{
+                System.out.println("CSK");
+            }
+	}
+}

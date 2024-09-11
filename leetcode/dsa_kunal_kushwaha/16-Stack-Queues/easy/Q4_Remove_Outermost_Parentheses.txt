@@ -1,0 +1,181 @@
+//beats 23% users only :(
+class Solution {
+    public static String removeOuterParentheses(String s) {
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> st = new Stack();
+        String temp = "";
+        int c1 = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if(st.isEmpty()){
+                if(ch=='('){
+                    st.push(ch);
+                } else{
+                    return "";
+                }
+            } else if(st.size()==1){
+                if(ch==')'){
+                    st.pop();
+                } else{
+                    st.push('(');
+                    temp = "(";
+                    c1 = 1;
+                }
+            } else{
+                if(ch=='('){
+                    temp += "(";
+                    c1 += 1;
+                } else{ //)
+                    if(c1 == 1){
+                        temp += ')';
+                        c1 -= 1;
+                    } else{
+                        temp += ")";
+                        c1 -= 1;
+                    }
+
+                    if(c1==0){
+                        sb.append(temp);
+                        temp = "";
+                        st.pop();
+                        c1 = 0;
+                    }
+                }
+            }
+            if(c1<0){
+                return "";
+            }
+        }
+        return sb.toString();
+    }
+}
+
+
+//beats 43% users
+class Solution {
+     public static String removeOuterParentheses(String s) {
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> st = new Stack();
+        String temp = "";
+        int c1 = 0;
+        for (char ch : s.toCharArray()) {
+            if(st.isEmpty()){
+                if(ch=='('){
+                    st.push(ch);
+                } else{
+                    return "";
+                }
+            } else if(st.size()==1){
+                if(ch==')'){
+                    st.pop();
+                } else{
+                    st.push('(');
+                    temp = "(";
+                    c1 = 1;
+                }
+            } else{
+                if(ch=='('){
+                    temp += "(";
+                    c1 += 1;
+                } else{ //)
+                    if(c1 == 1){
+                        temp += ')';
+                        c1 -= 1;
+                    } else{
+                        temp += ")";
+                        c1 -= 1;
+                    }
+
+                    if(c1==0){
+                        sb.append(temp);
+                        temp = "";
+                        st.pop();
+                        c1 = 0;
+                    }
+                }
+            }
+            if(c1<0){
+                return "";
+            }
+        }
+        return sb.toString();
+    }
+}
+
+//beats 50% users
+class Solution {
+     public static String removeOuterParentheses(String s) {
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> st = new Stack();
+        StringBuilder temp = new StringBuilder();
+        int c1 = 0;
+        for (char ch : s.toCharArray()) {
+            if(st.isEmpty()){
+                if(ch=='('){
+                    st.push(ch);
+                } else{
+                    return "";
+                }
+            } else if(st.size()==1){
+                if(ch==')'){
+                    st.pop();
+                } else{
+                    st.push('(');
+                    temp.append('(');
+                    c1 = 1;
+                }
+            } else{
+                if(ch=='('){
+                    temp.append('(');
+                    c1 += 1;
+                } else{ //)
+                    if(c1 == 1){
+                        temp.append(')');
+                        c1 -= 1;
+                    } else{
+                        temp.append(")");
+                        c1 -= 1;
+                    }
+
+                    if(c1==0){
+                        sb.append(temp.toString());
+                        temp.setLength(0);
+                        st.pop();
+                        c1 = 0;
+                    }
+                }
+            }
+            if(c1<0){
+                return "";
+            }
+        }
+        return sb.toString();
+    }
+}
+
+
+//beats 99% of the users
+class Solution {
+        public static String removeOuterParentheses(String s) {
+    StringBuilder sb = new StringBuilder();
+    int openCount = 0;
+
+    for (char ch : s.toCharArray()) {
+        if (ch == '(') {
+            if (openCount > 0) {
+                sb.append(ch);
+            }
+            openCount++;
+        } else if (ch == ')') {
+            openCount--;
+            if (openCount > 0) {
+                sb.append(ch);
+            }
+        } else {
+            // Handle invalid characters
+            return "";
+        }
+    }
+    return sb.toString();
+}
+}

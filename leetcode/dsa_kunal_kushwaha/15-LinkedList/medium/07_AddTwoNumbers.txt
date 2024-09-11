@@ -1,0 +1,38 @@
+//beats 100% users
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // Dummy head to simplify result list construction
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+        int carry = 0;
+
+        // Pointers for traversing the lists
+        ListNode p = l1;
+        ListNode q = l2;
+
+        // Traverse both lists
+        while (p != null || q != null) {
+            // Get the values from the current nodes, or 0 if the node is null
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+
+            // Calculate the sum and the carry
+            int sum = carry + x + y;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+
+            // Move to the next nodes in the lists
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;
+        }
+
+        // Check if there's a remaining carry to add as a new node
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+
+        // Return the next node after the dummy head, which is the real head of the result list
+        return dummyHead.next;
+    }
+}

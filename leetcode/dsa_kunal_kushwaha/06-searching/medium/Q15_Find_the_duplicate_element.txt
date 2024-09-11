@@ -1,0 +1,27 @@
+//beats 34% users
+class Solution {
+    public int findDuplicate(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int number : nums) {
+            if (map.containsKey(number)) {
+                return number;
+            }
+            map.put(number, 1);
+        }
+        return -1;  // This should never be reached if there's guaranteed to be a duplicate
+    }
+}
+
+//beats 91% users
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int arr[] = new int[100001];
+        for (int number : nums) {
+            if (arr[number]==1) {
+                return number;
+            }
+            arr[number] += 1;
+        }
+        return -1;  // This should never be reached if there's guaranteed to be a duplicate
+    }
+}

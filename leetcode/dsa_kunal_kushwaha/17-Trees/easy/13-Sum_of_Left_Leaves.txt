@@ -1,0 +1,21 @@
+//beats 100% users - used chatGPT
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null || (root.left==null && root.right==null)){
+            return 0;
+        }
+        return helper(root);
+    }
+    public int helper(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int leftSum = 0;
+        if(root.left!=null && root.left.left==null && root.left.right==null){
+            leftSum += root.left.val;
+        }
+        leftSum += helper(root.left);
+        leftSum += helper(root.right);
+        return leftSum;
+    }
+}

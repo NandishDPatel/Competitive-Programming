@@ -1,0 +1,17 @@
+//beats 100% of the users
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        return helper(root);
+    }
+    public TreeNode helper(TreeNode root){
+        if(root == null){
+            return null;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        helper(root.left);
+        helper(root.right);
+        return root;
+    }
+}

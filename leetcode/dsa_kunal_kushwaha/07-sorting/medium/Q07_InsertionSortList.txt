@@ -1,0 +1,107 @@
+//beats 7% users
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode temp = head;
+        ListNode curr = head.next;
+        while(curr!=null){
+            while(temp!=curr){
+                if(curr.val<temp.val){
+                    int storeVal = temp.val;
+                    temp.val = curr.val;
+                    curr.val = storeVal;
+                }
+                temp = temp.next;
+            }
+            temp = head;
+            curr = curr.next;
+        }
+        return head;
+    }
+}
+
+//beats 10% users
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode temp = head;
+        int listLen = 0;
+        int i = 0;
+        int j = 0;
+        while(temp!=null){
+            listLen++;
+            temp = temp.next;
+        }
+        int arr[] = new int[listLen];
+        temp = head;
+        for(i=0;i<listLen;i++){
+            arr[i] = temp.val;
+            temp = temp.next;
+        }
+        for(j=1;j<listLen;j++){
+            for(i=0;i<j;i++){
+                if(arr[j]<arr[i]){
+                    int tempVal = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tempVal;
+                }
+            }
+        }
+        temp = head;
+        i = 0;
+        while(temp!=null){
+            temp.val = arr[i];
+            i++;
+            temp = temp.next;
+        }
+        return head;
+    }
+}
+
+//beats 94% users - gpt
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        // If the list is empty or has only one element, it's already sorted
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // 'sorted' points to the last node of the sorted portion
+        ListNode sorted = head;
+        // 'current' points to the node we're currently trying to insert
+        ListNode current = head.next;
+
+        while (current != null) {
+            if (current.val >= sorted.val) {
+                // If current node is greater than the last sorted node,
+                // it's already in the right place
+                sorted = current;
+                current = current.next;
+            } else {
+                // We need to find the right place to insert the current node
+                ListNode search = dummy;
+
+                // Find the node after which we should insert
+                while (search.next.val < current.val) {
+                    search = search.next;
+                }
+
+                // Insert the current node
+                sorted.next = current.next;
+                current.next = search.next;
+                search.next = current;
+
+                // Move to the next unsorted node
+                current = sorted.next;
+            }
+        }
+
+        return dummy.next;
+    }
+}

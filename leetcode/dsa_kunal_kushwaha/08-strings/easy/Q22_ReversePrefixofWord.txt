@@ -1,0 +1,35 @@
+//beats 49% users
+class Solution {
+     public static String reversePrefix(String word, char ch) {
+        String ans = "";
+        int j = 0;
+        StringBuilder sb = new StringBuilder();
+        while(j<word.length() && word.charAt(j)!=ch){
+            sb.append(word.charAt(j));
+            j++;
+        }
+        if(j<word.length()){
+            sb.append(word.charAt(j));
+            String temp1 = String.valueOf(sb.reverse());
+            String temp2 = word.substring(j+1,word.length());
+            ans = temp1+temp2;
+            return ans;
+        }
+        return word;
+    }
+}
+
+// beats 100% of the users
+class Solution {
+     public static String reversePrefix(String word, char ch) {
+        int index = word.indexOf(ch);
+        if(index == -1){
+            return word;
+        }
+        StringBuilder sb = new StringBuilder(word.substring(0,index+1)).reverse();
+        if(index+1<word.length()){
+            sb.append(word.substring(index+1,word.length()));
+        }
+        return sb.toString();
+    }
+}

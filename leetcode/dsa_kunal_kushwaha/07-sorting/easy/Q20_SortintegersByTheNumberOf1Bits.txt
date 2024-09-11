@@ -1,0 +1,47 @@
+//beats 45% users
+class Solution {
+    public int[] sortByBits(int[] arr) {
+        // Convert int array to Integer array
+        Integer[] integerArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+
+        // Sort the Integer array using a custom comparator
+        Arrays.sort(integerArray, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                int bitCountA = countBits(a);
+                int bitCountB = countBits(b);
+
+                if (bitCountA == bitCountB) {
+                    return a - b; // Sort by value if bit counts are the same
+                } else {
+                    return bitCountA - bitCountB; // Sort by bit count
+                }
+            }
+        });
+
+        // Convert the sorted Integer array back to int array
+        return Arrays.stream(integerArray).mapToInt(Integer::intValue).toArray();
+    }
+
+    private int countBits(int num) {
+        int count = 0;
+        while (num > 0) {
+            num &= (num - 1); // Flip the least significant bit set to 0
+            count++;
+        }
+        return count;
+    }
+}
+
+//beats 55% users
+public class Solution {
+    public int[] sortByBits(int[] arr) {
+        Integer[] boxedArray = Arrays.stream(arr).boxed().toArray(Integer[]::new);
+        Arrays.sort(boxedArray, (a, b) -> {
+            int countA = Integer.bitCount(a);
+            int countB = Integer.bitCount(b);
+            return countA == countB ? a - b : countA - countB;
+        });
+        return Arrays.stream(boxedArray).mapToInt(Integer::intValue).toArray();
+    }
+}

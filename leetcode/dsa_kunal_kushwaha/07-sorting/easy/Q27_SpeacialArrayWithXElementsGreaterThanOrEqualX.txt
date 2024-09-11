@@ -1,0 +1,55 @@
+/*---- Brut Force Approch---*/
+//O(n^2)
+class Solution {
+    public static int specialArray(int[] nums) {
+        int maxNum = nums.length;
+        for (int i = 0; i < maxNum+1; i++) {
+            int count = 0;
+            for (int j = 0; j < maxNum; j++) {
+                if(nums[j]>=i){
+                    count++;
+                }
+            }
+            if(count==i){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+-----------------------------------
+//O(n*log n)
+class Solution {
+    public static int specialArray(int[] nums) {
+        int maxNum = -1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>maxNum){
+                maxNum = nums[i];
+            }
+        }
+        //range defined -> 0,maxNum
+        int start = 1;
+        int end = maxNum;
+        int mid = -1;
+        while(start<=end){
+            mid = start + (end-start)/2;
+            int count = 0;
+            for(int j=0;j<nums.length;j++){
+                if(nums[j]>=mid){
+                    count++;
+                }
+            }
+            if(count == mid){
+                return mid;
+            } else if(count<mid){
+                end = mid-1;
+            } else{
+                start = mid+1;
+            }
+
+        }
+        return -1;
+    }
+}
+

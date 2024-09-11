@@ -1,0 +1,18 @@
+//beats 100% users
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        int x = helper(root);
+        // System.out.println(x);
+        return (x>=0) ? true : false;
+    }
+    public int helper(TreeNode root){
+            if(root == null){
+                return 0;
+            }
+
+            int leftH = helper(root.left);
+            int rightH = helper(root.right);
+            // System.out.println(root.val+" - "+leftH+" "+rightH);
+            return (Math.abs(leftH-rightH)<=1) ? Math.max(leftH,rightH)+1 : -99999;
+    }
+}

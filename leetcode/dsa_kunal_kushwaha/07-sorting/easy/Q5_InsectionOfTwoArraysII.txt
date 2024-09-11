@@ -1,0 +1,45 @@
+ /*
+//beats 35% 
+ HashSet<Integer> set = new HashSet<>();
+        HashSet<Integer> ans = new HashSet<>();
+        for(int i=0;i<nums1.length;i++){
+            set.add(nums1[i]);
+        }
+        int count = 0;
+        for(int j=0;j<nums2.length;j++){
+            if(set.contains(nums2[j])){
+                ans.add(nums2[j]);
+                count++;
+            }
+        }
+        int[] arr = ans.stream().mapToInt(i->i).toArray();
+        return arr;
+
+*/
+
+
+
+//below beats 91% people
+/*
+class Solution {
+    public static int[] intersect(int[] nums1, int[] nums2) {
+    HashMap<Integer, Integer> hashMap = new HashMap<>();
+    ArrayList<Integer> temp = new ArrayList<>();
+    for (int num : nums1) {
+        hashMap.put(num, hashMap.getOrDefault(num, 0) + 1);
+    }
+    for (int num : nums2) {
+        if (hashMap.containsKey(num) && hashMap.get(num) > 0) {
+            temp.add(num);
+            hashMap.put(num, hashMap.get(num) - 1);
+        }
+    }
+    int ans[] = new int[temp.size()];
+    int i = 0;
+    for (Integer num : temp) {
+        ans[i++] = num;
+    }
+    return ans;
+    }    
+}
+*/

@@ -1,0 +1,21 @@
+//beats 100% and 95% memory wise
+class Solution {
+    public int fib(int n) {
+        return fibUsingRec(n,0,1,1);
+    }
+    static int temp = 0;
+    public static int fibUsingRec(int n,int a0,int a1,int count){
+        if(n==0){
+            return 0;
+        }
+        if(n==1){
+            return 1;
+        }
+        if(count<n){
+            temp = a1;
+            count++;
+            return fibUsingRec(n,temp,a0+a1,count);
+        }
+        return a1;
+    }
+}

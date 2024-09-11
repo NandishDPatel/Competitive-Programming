@@ -1,0 +1,77 @@
+/*------ Method-1 ----------*/
+class Solution {
+      public int findKthPositive(int[] arr, int k){
+        ArrayList<Integer> missingInt = new ArrayList<>();
+        for (int i = 1; i < arr[0]; i++) {
+            missingInt.add(i);
+        }
+        for (int i = 0; i < arr.length-1; i++) {
+            if(arr[i]!=arr[i+1]+1){
+                for(int j=arr[i]+1;j<arr[i+1];j++){
+                    missingInt.add(j);
+                }
+            }
+        }
+        if(missingInt.size()>=k){
+            return missingInt.get(k-1);
+        }
+        int rem = k-missingInt.size();
+        return arr[arr.length-1]+rem;
+    }
+}
+
+-------------------------------
+/*---------- Method-2 -----------*/
+class Solution {
+      public int findKthPositive(int[] arr, int k){
+        int count = 0;
+        for (int i = 1; i < arr[0]; i++) {
+            count++;
+            if(count==k){
+                return i;
+            }
+        }
+        for (int i = 0; i < arr.length-1; i++) {
+            if(arr[i]!=arr[i+1]+1){
+                for(int j=arr[i]+1;j<arr[i+1];j++){
+                    count++;
+                    if(count==k){
+                        return j;
+                    }
+                }
+            }
+        }
+        int rem = k-count;
+        return (arr[arr.length-1]+rem);
+    }
+}
+
+
+
+/*O(n) Times (Solved by myself)*/
+//beats 100%
+/*
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int chk = 0;
+        if(arr[0]!=1){
+            chk+=arr[0]-1;
+        }
+        if(chk>=k){
+            return k;
+        }
+        int i=0;
+        for(i=1;i<arr.length;i++){
+            if(arr[i]-1!=arr[i-1]){
+                int temp = chk+(arr[i]-arr[i-1]-1);
+                // chk += arr[i]-arr[i-1]-1;
+                if(temp>=k){
+                    return arr[i-1]+(k-chk);
+                }
+                chk=temp;
+            }
+        }
+        return arr[i-1]+(k-chk);
+    }
+}
+*/

@@ -1,0 +1,99 @@
+//beats 52.78% users
+class Solution {
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length()-1;
+        int j = b.length()-1;
+        int carry = 0;
+        while(i>=0 && j>=0){
+            int x1 = Character.getNumericValue(a.charAt(i));
+            int x2 = Character.getNumericValue(b.charAt(j));
+            if(x1+x2==0){
+                sb.append(carry);
+                carry = 0;
+            } else if(x1+x2==1){
+                if(carry==0){
+                    sb.append(1);
+                } else{
+                    sb.append(0);
+                    carry = 1;
+                }
+            } else{
+                if(carry==0){
+                    sb.append(0);
+                    carry = 1;
+                } else{
+                    sb.append(1);
+                    carry = 1;
+                }
+            }
+            i--;
+            j--;
+        }
+
+        while(i>=0){
+            int x = Character.getNumericValue(a.charAt(i));
+            if(carry==0){
+                sb.append(x);
+            } else{
+                if(x+carry<=1){
+                    sb.append(1);
+                    carry = 0;
+                } else {
+                    sb.append(0);
+                    carry = 1;
+                }
+            }
+            i--;
+        }
+
+        while(j>=0){
+            int x = Character.getNumericValue(b.charAt(j));
+            if(carry==0){
+                sb.append(x);
+            } else{
+                if(x+carry<=1){
+                    sb.append(1);
+                    carry = 0;
+                } else {
+                    sb.append(0);
+                    carry = 1;
+                }
+            }
+            j--;
+        }
+        if(carry==1){
+            sb.append(1);
+        }
+
+        String ans = sb.reverse().toString();
+        return ans;
+
+    }
+}
+
+
+//beats 100% users
+class Solution {
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int carry = 0;
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (i >= 0) {
+                sum += a.charAt(i--) - '0';
+            }
+            if (j >= 0) {
+                sum += b.charAt(j--) - '0';
+            }
+            sb.append(sum % 2);
+            carry = sum / 2;
+        }
+        if (carry != 0) {
+            sb.append(carry);
+        }
+        return sb.reverse().toString();
+    }
+}

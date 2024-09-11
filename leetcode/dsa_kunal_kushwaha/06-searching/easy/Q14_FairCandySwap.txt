@@ -1,0 +1,23 @@
+//beats 78% and 95% in memory
+class Solution {
+    public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
+        int al = 0;
+        int boo = 0;
+        for (int i = 0; i < aliceSizes.length; i++) {
+            al += aliceSizes[i];
+        }
+        HashSet<Integer> bobHash = new HashSet<>();
+        for (int j=0;j<bobSizes.length;j++){
+            boo += bobSizes[j];
+            bobHash.add(bobSizes[j]);
+        }
+        int diff = (al-boo)/2;
+        for (int i = 0; i < aliceSizes.length; i++) {
+            int chk = aliceSizes[i]-diff;
+            if(bobHash.contains(chk)){
+                return new int[]{aliceSizes[i],chk};
+            }
+        }    
+        return new int[]{-1,-1};
+    }
+}

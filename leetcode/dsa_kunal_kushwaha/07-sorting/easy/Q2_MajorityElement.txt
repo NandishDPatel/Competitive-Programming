@@ -1,0 +1,98 @@
+/*beats 18% only :(*/
+class Solution {
+        public int majorityElement(int[] nums) {
+        int ans = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int maxCount = 0;
+        for (int num : nums) {
+            map.put(num,map.getOrDefault(num,0)+1);
+            if(map.get(num)>maxCount){
+                maxCount = map.get(num);
+                ans = num;
+            }
+        }
+        return ans;
+    }
+}
+
+//below code beats 64% users
+class Solution {
+       public static int majorityElement(int[] nums) {
+        int ans = 0;
+        HashSet<Integer> set = new HashSet<>();
+        int maxCount = 0;
+        for (int num : nums) {
+            if(!set.contains(num)){
+                set.add(num);
+            }
+        }
+        for(Integer num : set){
+            int count = 0;
+            int chk = (int) num;
+            for (int i = 0; i < nums.length; i++) {
+                if(chk == nums[i]){
+                    count++;
+                }
+            }
+            if(count>(nums.length)/2){
+                return chk;
+            }
+            if(count>maxCount){
+                ans = chk;
+                maxCount = count;
+            }
+
+        }
+        return ans;
+    }
+}
+
+//below code beats 78% of the users
+class Solution {
+       public static int majorityElement(int[] nums) {
+        int ans = 0;
+        HashSet<Integer> set = new HashSet<>();
+        int maxCount = 0;
+        for (int num : nums) {
+            if(!set.contains(num)){
+                set.add(num);
+                int count = 0;
+                for (int i = 0; i < nums.length; i++) {
+                    if(num == nums[i]){
+                        count++;
+                    }
+                }
+                if(count>(nums.length)/2){
+                    return num;
+                }
+                if(count>maxCount){
+                    ans = num;
+                    maxCount = count;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+
+//beats 99% people (Moore Voting Algorithm)
+class Solution {
+    public static int majorityElement(int[] nums) {
+//        Moore Voting Algorithm
+//        Assumption : element should be there more than (n/2) times and only two elements should be present
+        int count = 0;
+        int candidate = 0;
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return candidate;
+    }
+}

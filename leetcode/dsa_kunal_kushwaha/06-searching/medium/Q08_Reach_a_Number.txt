@@ -1,0 +1,23 @@
+//used chatgpt :( - beats 89% users
+class Solution {
+    public int reachNumber(int target) {
+        target = Math.abs(target);  // We can treat negative targets the same as positive
+        int step = 0;
+        int sum = 0;
+
+        // Keep moving forward until we reach or overshoot the target
+        while (sum < target) {
+            step++;
+            sum += step;
+        }
+
+        // If the difference is even, we're done
+        // If it's odd, we need to add more steps until the difference becomes even
+        while ((sum - target) % 2 != 0) {
+            step++;
+            sum += step;
+        }
+
+        return step;
+    }
+}

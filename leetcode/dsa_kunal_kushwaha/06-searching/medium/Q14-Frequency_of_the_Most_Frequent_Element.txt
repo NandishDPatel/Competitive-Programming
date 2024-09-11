@@ -1,0 +1,63 @@
+//my try but not working
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+        Arrays.sort(nums);
+        int diffArr[] = new int[nums.length-1];
+        for(int i=0;i<nums.length-1;i++){
+            diffArr[i] = nums[i+1] - nums[i];
+        }
+        System.out.println(Arrays.toString(diffArr));
+        int curr_count = 1;
+        int max_count = 1;
+        int temp = k;
+        int check = -1;
+        for(int j=0;j<diffArr.length;j++){
+            check = diffArr[j]*curr_count;
+            if(check<=temp){
+                temp -= check;
+                curr_count++;
+                if(curr_count>max_count){
+                    max_count = curr_count;
+                }
+            } else{
+                curr_count = 1;
+                temp = k;
+                check = diffArr[j]*curr_count;
+                if(check<=temp){
+                    temp -= check;
+                    curr_count++;
+                    if(curr_count>max_count){
+                        max_count = curr_count;
+                    }
+                }
+            }
+        }
+        return max_count;
+    }
+}
+
+//chagpt try - beats 82%
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+       Arrays.sort(nums);
+        int n = nums.length;
+        int max_count = 1; // Initialize the max_count to at least 1
+        int left = 0; // Left pointer
+        long total = 0; // To keep track of the total increments needed
+
+        for (int right = 1; right < n; ++right) {
+            total += (long) (nums[right] - nums[right - 1]) * (right - left);
+
+            // Shrink the window size from the left if total increments exceed k
+            while (total > k) {
+                total -= nums[right] - nums[left];
+                ++left;
+            }
+
+            // Update the max_count with the size of the current window
+            max_count = Math.max(max_count, right - left + 1);
+        }
+
+        return max_count;
+    }
+}

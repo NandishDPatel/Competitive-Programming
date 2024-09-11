@@ -1,0 +1,112 @@
+//beats 65%
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        int temp1 = 0;
+        int temp2 = 0;
+        int add = s.length()/2;
+        for(int i=0;i<add;i++){
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(i+add);
+            if(ch1=='a' || ch1=='e' || ch1=='i' || ch1=='o' || ch1=='u' || ch1=='A' || ch1=='E' || ch1=='I' || ch1=='O' || ch1=='U'){
+                temp1 += 1;
+            }
+            if(ch2=='a' || ch2=='e' || ch2=='i' || ch2=='o' || ch2=='u' || ch2=='A' || ch2=='E' || ch2=='I' || ch2=='O' || ch2=='U'){
+                temp2 += 1;
+            }
+        }
+        return temp1==temp2;
+    }
+}
+
+//beats 65%
+class Solution {
+     public static boolean halvesAreAlike(String s) {
+        HashSet<Character> set = new HashSet<>();
+        set.add('a');
+        set.add('e');
+        set.add('i');
+        set.add('o');
+        set.add('u');
+        set.add('A');
+        set.add('E');
+        set.add('I');
+        set.add('O');
+        set.add('U');
+        int temp1 = 0;
+        int temp2 = 0;
+        int add = s.length()/2;
+        for(int i=0;i<add;i++){
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(i+add);
+            if(set.contains(ch1)){
+                temp1 += 1;
+            }
+            if(set.contains(ch2)){
+                temp2 += 1;
+            }
+        }
+        return temp1==temp2;
+    }
+}
+
+
+//beats 95%
+class Solution {
+     public boolean halvesAreAlike(String s) {
+        Set<Character> vowels = new HashSet<>();
+        vowels.add('a'); vowels.add('e'); vowels.add('i'); vowels.add('o'); vowels.add('u');
+        vowels.add('A'); vowels.add('E'); vowels.add('I'); vowels.add('O'); vowels.add('U');
+
+        int length = s.length();
+        int midPoint = length / 2;
+
+        String firstHalf = s.substring(0, midPoint);
+        String secondHalf = s.substring(midPoint);
+
+        return countVowels(firstHalf, vowels) == countVowels(secondHalf, vowels);
+    }
+
+    private int countVowels(String str, Set<Character> vowels) {
+        int count = 0;
+        for (char c : str.toCharArray()) {
+            if (vowels.contains(c)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+
+//beats 95%
+class Solution {
+   public static boolean halvesAreAlike(String s) {
+        HashSet<Character> set = new HashSet<>();
+        set.add('a');
+        set.add('e');
+        set.add('i');
+        set.add('o');
+        set.add('u');
+        set.add('A');
+        set.add('E');
+        set.add('I');
+        set.add('O');
+        set.add('U');
+        int temp1 = 0;
+        int temp2 = 0;
+        int midpoint = s.length()/2;
+        temp1 = retIndex(s.substring(0,midpoint),set);
+        temp2 = retIndex(s.substring(midpoint,s.length()),set);
+        return temp1==temp2;
+    }
+    public static int retIndex(String s,HashSet<Character> set){
+        int temp = 0;
+        for(int i=0;i<s.length();i++){
+            char chk1 = s.charAt(i);
+            if(set.contains(chk1)){
+                temp += 1;
+            }
+        }
+        return temp;
+    }
+}

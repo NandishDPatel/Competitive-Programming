@@ -1,0 +1,16 @@
+//beats only 32% users and 5% in memory
+class Solution {
+    public void reverseString(char[] s) {
+        reverseUsingRecursion(s,0);
+    }
+    public char[] reverseUsingRecursion(char[] s,int currIndex){
+        if(currIndex==(s.length/2)){
+            return s;
+        }
+        char temp = s[currIndex];
+        s[currIndex] = s[s.length-1-currIndex];
+        s[s.length-1-currIndex] = temp;
+        currIndex++;
+        return reverseUsingRecursion(s,currIndex);
+    }
+}

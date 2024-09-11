@@ -1,0 +1,43 @@
+//done by my own - beats 100% users
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int left = 0;
+        int right = n-1;
+        int top = 0;
+        int num = 1;
+        int bottom = n-1;
+        int matrix[][] = new int[n][n];
+        while(left<=right && top<=bottom){
+            //from left to right
+            for(int i=left;i<=right;i++){
+                matrix[top][i] = num++;
+            }
+            top++;
+
+            //from top to bottom
+            for(int i=top;i<=bottom;i++){
+                matrix[i][right] = num++;
+            }
+            right--;
+
+            //from right to left
+            if(left<=right){
+                for(int i=right;i>=left;i--){
+                    matrix[bottom][i] = num++;
+                }
+                bottom--;
+            }
+
+            //from bottom to top
+            if(top<=bottom){
+                for(int i=bottom;i>=top;i--){
+                    matrix[i][left] = num++;
+                }
+                left++;
+            }
+        }
+
+        return matrix;
+
+    }
+}

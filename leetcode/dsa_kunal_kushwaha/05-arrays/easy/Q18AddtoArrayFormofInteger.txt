@@ -1,0 +1,102 @@
+//beats 5% users only
+class Solution {
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int lastInd = num.length-1;
+        int carry = 0;
+        while(k>0 && lastInd>=0){
+            int lastDigit = k%10;
+            int check = num[lastInd]+lastDigit+carry;
+            if(check<=9){
+                num[lastInd] = check;
+                ans.add(0,check);
+                carry = 0;
+            } else{
+                carry = 1;
+                num[lastInd] = check%10;
+                ans.add(0,check%10);
+            }
+            k = (k - lastDigit)/10;
+            lastInd--;
+        }
+        while(k>0){
+            int lastDigit = k%10;
+            int addInt = lastDigit+carry;
+            if(addInt<=9){
+                ans.add(0,addInt);
+                carry = 0;
+            } else{
+                ans.add(0,addInt%10);
+                carry = 1;
+            }
+            k = (k - lastDigit)/10;
+        }
+        while(lastInd>=0){
+            int addInt = num[lastInd]+carry;
+            if(addInt<=9){
+                ans.add(0,addInt);
+                carry = 0;
+            } else{
+                ans.add(0,addInt%10);
+                carry = 1;
+            }
+            lastInd--;
+        }
+        if(carry==1){
+            ans.add(0,1);
+        }
+        return ans;
+
+    }
+}
+
+//beats 28% users
+class Solution {
+        public List<Integer> addToArrayForm(int[] num, int k) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int lastInd = num.length - 1;
+        int carry = 0;
+
+        // Process digits from the end of the num array and k
+        while (k > 0 || lastInd >= 0 || carry > 0) {
+            int lastDigit = k % 10;
+            int numDigit = (lastInd >= 0) ? num[lastInd] : 0;
+            int sum = numDigit + lastDigit + carry;
+
+            result.add(0, sum % 10);  // Add the last digit of sum to the result
+            carry = sum / 10;  // Calculate carry for the next digit
+
+            k /= 10;  // Remove the last digit from k
+            lastInd--;  // Move to the next digit in num
+        }
+
+        return result;
+    }
+}
+
+//beats 98% users
+class Solution {
+ public List<Integer> addToArrayForm(int[] num, int k) {
+        LinkedList<Integer> output = new LinkedList<>();
+        int i = num.length - 1;
+        int carry = 0;
+
+        // Process both the number in array form and the integer k
+        while (k > 0 || carry > 0) {
+            int tmp = carry + k % 10;
+            if (i >= 0) {
+                tmp += num[i--];
+            }
+            output.addFirst(tmp % 10);
+            carry = tmp / 10;
+            k /= 10;
+        }
+
+        // Add remaining digits from num array
+        while (i >= 0) {
+            output.addFirst(num[i--]);
+        }
+
+        return output;
+    }
+}

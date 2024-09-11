@@ -1,0 +1,42 @@
+//beats 16% users
+class Solution {
+    public static List<List<Integer>> minimumAbsDifference(int[] arr) {
+            List<List<Integer>> result = new ArrayList<>();
+            Arrays.sort(arr); //sorts the arr
+            int minDiff = Integer.MAX_VALUE;
+            for(int i=0;i<arr.length-1;i++){
+                if(Math.abs(arr[i]-arr[i+1])<minDiff){
+                    minDiff = Math.abs(arr[i]-arr[i+1]);
+                }
+            }
+            for (int i = 0; i < arr.length-1; i++) {
+                List<Integer> temp = new ArrayList<>();
+                if(Math.abs(arr[i]-arr[i+1])==minDiff){
+                    temp.add(arr[i]);
+                    temp.add(arr[i+1]);
+                    result.add(temp);
+                }
+            }
+            return result;
+        }
+}
+
+//beats 71% users sometime
+class Solution {
+    public List<List<Integer>> minimumAbsDifference(int[] arr) {
+        List<List<Integer>> list =  new ArrayList<>();
+        Arrays.sort(arr);
+        int min = Integer.MAX_VALUE;
+        for(int i = 0;i<arr.length-1;i++){
+            min = Math.min(min,Math.abs(arr[i]-arr[i+1]));
+        }
+        for(int i = 0;i<arr.length-1;i++){
+            if(Math.abs(arr[i]-arr[i+1])==min){
+                list.add(Arrays.asList(arr[i],arr[i+1]));
+            }
+        }
+
+        return list;
+
+    }
+}

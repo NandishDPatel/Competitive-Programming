@@ -1,0 +1,83 @@
+//beats 67% users - my solution
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int temp = 0;
+        int high = searchMaxPile(piles);
+        int ans = high;
+        int low = 1;
+        while (low <= high) {
+            temp = 0;
+            int mid = low + (high - low) / 2;
+            for (int i = 0; i < piles.length; i++) {
+                if (temp > h) {
+                    break;
+                } else {
+                    if (piles[i] <= mid) {
+                        temp += 1;
+                    } else {
+                        if (piles[i] % mid == 0) {
+                            temp += piles[i] / mid;
+                        } else {
+                            temp += (piles[i] / mid) + 1;
+                        }
+                    }
+                }
+            }
+            if (temp <= h) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    private int searchMaxPile(int[] piles) {
+        int max = -1;
+        for (int i = 0; i < piles.length; i++) {
+            if (piles[i] > max) {
+                max = piles[i];
+            }
+        }
+        return max;
+    }
+}
+
+//beats 87% users - chatGPT
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1;
+        int high = searchMaxPile(piles);
+        int ans = high;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            long hours = 0;
+
+            for (int pile : piles) {
+                // Calculating hours required at speed 'mid'
+                hours += (pile + mid - 1) / mid;
+                if (hours > h) {
+                    break; // No need to continue if already exceeding h
+                }
+            }
+
+            if (hours <= h) {
+                ans = mid; // Found a valid solution, try for a smaller one
+                high = mid - 1;
+            } else {
+                low = mid + 1; // Too slow, increase the speed
+            }
+        }
+
+        return ans;
+    }
+
+    private int searchMaxPile(int[] piles) {
+        int max = Integer.MIN_VALUE;
+        for (int pile : piles) {
+            max = Math.max(max, pile);
+        }
+        return max;
+    }
+}

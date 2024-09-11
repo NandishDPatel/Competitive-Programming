@@ -1,0 +1,129 @@
+//beats 45% users
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int[] findMode(TreeNode root) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int mode = 0;
+        HashMap<Integer,Integer> temp = new HashMap<>();
+        temp = helper(root,map);
+        for(Integer val1 : temp.values()){
+            if(val1>mode){
+                mode = val1;
+            }
+        }
+        for(Map.Entry<Integer,Integer> entry : temp.entrySet()){
+            if(entry.getValue()==mode){
+                ans.add(entry.getKey());
+            }
+        }
+        int finalAns[] = new int[ans.size()];
+        int ind = 0;
+        for(Integer val : ans){
+            finalAns[ind++] = val;
+        }
+        return finalAns;
+    }
+    public HashMap<Integer,Integer> helper(TreeNode root, HashMap<Integer,Integer> map){
+        if(root==null){
+            return map;
+        }
+        if(map.containsKey(root.val)){
+            map.put(root.val,map.get(root.val)+1);
+        } else{
+            map.put(root.val,1);
+        }
+        helper(root.left,map);
+        helper(root.right,map);
+        return map;
+    }
+}
+
+
+//beats 18% users only
+class Solution {
+    public int[] findMode(TreeNode root) {
+        int[] arr = new int[200002]; // 10^5*2 + 2
+        // mid element = 10^5 + 1 = 100001
+        arr = helper(root, arr);
+        int max_freq = arr[arr.length - 1]; // last pos for max_freq
+        ArrayList<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] == max_freq) {
+                int org_value = i - 100001;
+                ans.add(org_value);
+            }
+        }
+        int[] final_result = new int[ans.size()];
+        int j = 0;
+        for (Integer val : ans) {
+            final_result[j++] = val;
+        }
+        return final_result;
+    }
+
+    public int[] helper(TreeNode root, int[] arr_of_nums) {
+        if (root == null) {
+            return arr_of_nums;
+        }
+        int pos_to_add_num = root.val + 100001;
+        arr_of_nums[pos_to_add_num]++;
+        int current_freq = arr_of_nums[pos_to_add_num];
+        if (current_freq > arr_of_nums[arr_of_nums.length - 1]) {
+            arr_of_nums[arr_of_nums.length - 1] = current_freq;
+        }
+        helper(root.left, arr_of_nums);
+        helper(root.right, arr_of_nums);
+        return arr_of_nums;
+    }
+}
+
+
+//beats 100% users - leetcode Solution
+class Solution {
+    private int currentVal;
+    private int currentCount = 0;
+    private int maxCount = 0;
+    private List<Integer> modes = new ArrayList<>();
+
+    public int[] findMode(TreeNode root) {
+        inOrderTraversal(root);
+        int[] result = new int[modes.size()];
+        for (int i = 0; i < modes.size(); i++) {
+            result[i] = modes.get(i);
+        }
+        return result;
+    }
+
+    private void inOrderTraversal(TreeNode node) {
+        if (node == null) return;
+
+        inOrderTraversal(node.left);
+
+        currentCount = (node.val == currentVal) ? currentCount + 1 : 1;
+        if (currentCount == maxCount) {
+            modes.add(node.val);
+        } else if (currentCount > maxCount) {
+            maxCount = currentCount;
+            modes.clear();
+            modes.add(node.val);
+        }
+        currentVal = node.val;
+
+        inOrderTraversal(node.right);
+    }
+}

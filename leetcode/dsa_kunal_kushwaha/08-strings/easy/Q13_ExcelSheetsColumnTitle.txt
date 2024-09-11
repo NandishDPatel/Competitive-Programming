@@ -1,0 +1,15 @@
+//beats 100% users
+class Solution {
+   public static String convertToTitle(int columnNumber) {
+        StringBuilder ans = new StringBuilder();
+
+        while (columnNumber > 0) {
+            int rem = (columnNumber - 1) % 26; // Getting remainder
+            char ch = (char) (rem + 'A'); // Getting corresponding character
+            ans.insert(0, ch); // Inserting character at the beginning of the string
+            columnNumber = (columnNumber - 1) / 26; // Updating columnNumber for next iteration
+        }
+
+        return ans.toString();
+    }
+}

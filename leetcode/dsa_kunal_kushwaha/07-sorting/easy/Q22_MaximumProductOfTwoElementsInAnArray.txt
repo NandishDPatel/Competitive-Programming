@@ -1,0 +1,51 @@
+//beats 60% of the users
+class Solution {
+    public int maxProduct(int[] nums) {
+        Arrays.sort(nums);
+        return (nums[nums.length-1]-1)*(nums[nums.length-2]-1);
+    }
+}
+
+
+//beats 75% pf the users
+class Solution {
+    public int maxProduct(int[] nums) {
+        int largest = -1;
+        int secondLargest = -1;
+        if(nums.length==2){
+            return (nums[0]-1)*(nums[1]-1);
+        }
+        int temp1 = -1;
+        // int temp2 = -1;
+        int i = 0;
+        for(i=0;i<nums.length;i++){
+            if(nums[i]>largest){
+                largest = nums[i];
+                temp1 = i;
+            }
+        }
+        for(int j=0;j<nums.length;j++){
+            if(nums[j]>secondLargest && temp1!=j){
+                secondLargest = nums[j];
+            }
+        }
+        return (largest-1)*(secondLargest-1);
+    }
+}
+
+
+//beats 100% pf the users :)
+class Solution {
+    public int maxProduct(int[] nums) {
+        int l = -1,sl = -1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>l){
+                sl = l;
+                l = nums[i];
+            } else if(nums[i]>sl){
+                sl = nums[i];
+            }
+        }
+        return (l-1)*(sl-1);
+    }
+}

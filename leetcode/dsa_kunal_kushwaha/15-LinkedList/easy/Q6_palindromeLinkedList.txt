@@ -1,0 +1,134 @@
+//beats 55% users only
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        //find starting point from where we check pallindrom after mid point
+        if(head.next == null || head==null){
+            return true;
+        }
+        ListNode temp = head;
+        int size = 1;
+        while(temp.next!=null){
+            temp = temp.next;
+            size++;
+        }
+        int start = -1;
+        if(size%2==0){
+            start = size/2 + 1;
+        } else{
+            start = size/2 + 2;
+        }
+        //starting node position
+        int j = 1;
+        ListNode temp2 = head;
+        ListNode startNode = null;
+        while(temp2.next!=null && j<start){
+            temp2 = temp2.next;
+            j++;
+        }
+        startNode = temp2;
+
+        while(startNode!=null && start!=size+1 ){
+            ListNode x = head;
+            int i = 1;
+            while(i<((start-size)*-1)+1){
+                x = x.next;
+                i++;
+            }
+            if(x.val==startNode.val){
+                startNode = startNode.next;
+                start++;
+            } else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+//beats 16% users only
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode temp = head;
+        int size = 0;
+        while(temp!=null){
+            temp = temp.next;
+            size++;
+        }
+        System.out.println(size);
+        int mid = (size/2);
+        int currCount = 0;
+        temp = head;
+        Stack<Integer> stack = new Stack<>();
+        while(currCount!=mid){
+            stack.push(temp.val);
+            currCount++;
+            temp = temp.next;
+        }
+        if(size%2!=0){
+            temp = temp.next;
+            currCount += 1;
+        }
+        while(currCount<size){
+            if(!stack.isEmpty() && temp.val==stack.peek()){
+                stack.pop();
+                temp = temp.next;
+                currCount++;
+            } else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+//beats 44% users - chatGpt
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> list = new ArrayList();
+        while(head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+
+        int left = 0;
+        int right = list.size()-1;
+        while(left < right && list.get(left) == list.get(right)) {
+            left++;
+            right--;
+        }
+        return left >= right;
+    }
+}
+//beats 83% users - leetcode Solution
+class Solution {
+    ListNode reverse(ListNode head){
+        ListNode curr=head;
+        ListNode nextt=head;
+        ListNode prev=null;
+        while(curr!=null){
+            nextt=nextt.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextt;
+        }
+        return prev;
+    }
+    public boolean isPalindrome(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+         while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+         }
+         ListNode temp=reverse(slow);
+         ListNode temp1=head;
+         while(temp!=null){
+            if(temp1.val!=temp.val){
+                 return false;
+            }
+            temp=temp.next;
+            temp1=temp1.next;
+         }
+     return true;
+    }
+}

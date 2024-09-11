@@ -1,0 +1,28 @@
+//beats 100% users - used chatGpt :(
+class Solution {
+    private int maxDiameter = 0;
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        calculateDiameter(root);
+        return maxDiameter;
+    }
+
+    private int calculateDiameter(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = calculateDiameter(node.left);
+        int rightHeight = calculateDiameter(node.right);
+
+        // Update the maximum diameter found so far
+        maxDiameter = Math.max(maxDiameter, leftHeight + rightHeight);
+
+        // Return the height of the current node's subtree
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+}

@@ -1,0 +1,13 @@
+//beats 100% users
+class Solution {
+    public static int strStr(String haystack, String needle) {
+        int j = needle.length();
+        for (int i = 0; i < haystack.length()-needle.length()+1; i++) {
+            String chk = haystack.substring(i,i+j);
+            if(chk.equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}

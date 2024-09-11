@@ -1,0 +1,40 @@
+//beats 100% users 
+class Solution {
+    public int[] searchRange(int[] nums, int target){
+        if(nums.length==0){
+            return new int[]{-1,-1};
+        }
+        int firstPos = firstPosition(target,nums);
+        int lastPos = lastPosition(target,nums);
+        
+        return new int[]{firstPos,lastPos};
+    }
+    public int firstPosition(int target,int[] nums){
+        int low = 0;
+        int high = nums.length-1;
+        int mid = -1;
+        while(low<=high){
+            mid = low + (high-low)/2;
+            if(nums[mid]>=target){
+                high = mid-1;
+            } else{
+                low = mid+1;
+            }
+        }
+        return (low<nums.length && nums[low]==target) ? low : -1;
+    }
+    public int lastPosition(int target,int[] nums){
+        int low = 0;
+        int high = nums.length-1;
+        int mid = -1;
+        while(low<=high){
+            mid = low + (high-low)/2;
+            if(nums[mid]<=target){
+                low = mid+1;
+            } else{
+                high = mid-1;
+            } 
+        }
+        return (high>=0 && nums[high]==target) ? high : -1;
+    }
+}

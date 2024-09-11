@@ -1,0 +1,56 @@
+//beats 5% of the users
+class Solution {
+    public int numOfStrings(String[] patterns, String word) {
+        int count = 0;
+        HashSet<String> temp1 = createMap(word);
+        for(String p : patterns){
+            if(temp1.contains(p)){
+                count++;
+
+            }
+        }
+        return count;
+    }
+
+    public HashSet<String> createMap(String word){
+        HashSet<String> map = new HashSet<>();
+        for(int i=0;i<word.length();i++){
+            for(int j=0;j<word.length()-i;j++){
+                String temp = word.substring(j,j+i+1);
+                map.add(temp);
+            }
+        }
+        return map;
+    }
+}
+
+//beats 8.26% users
+class Solution {
+    public static int numOfStrings(String[] patterns, String word){
+        int count = 0;
+        for (int i = 0; i < patterns.length; i++) {
+            int len = patterns[i].length();
+            String temp = patterns[i];
+            for (int j = 0; j <= word.length()-len; j++) {
+                if(temp.equals(word.substring(j,j+len))){
+                    count++;
+                    break;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+//beats 100% and 75% space wise
+class Solution {
+    public static int numOfStrings(String[] patterns, String word){
+        int count = 0;
+        for (int i = 0; i < patterns.length; i++) {
+            if(word.contains(patterns[i])){
+                count++;
+            }
+        }
+        return count;
+    }
+}

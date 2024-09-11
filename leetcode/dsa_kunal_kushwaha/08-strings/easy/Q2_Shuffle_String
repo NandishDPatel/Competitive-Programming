@@ -1,0 +1,33 @@
+//beats 76.32% users
+class Solution {
+        public static String restoreString(String s, int[] indices) {
+        char[] ans = new char[s.length()]; // Create char array of same length as input string
+        for (int i = 0; i < indices.length; i++) {
+            ans[indices[i]] = s.charAt(i); // Use indices[i] to determine the position in the result array
+        }
+        return new String(ans); // Convert char array to string
+    }
+}
+
+//beats 100% users
+class Solution {
+    public static String restoreString(String s, int[] indices) {
+        char[] ans = new char[s.length()]; // Create char array of same length as input string
+        for (int i = 0; i < indices.length; i++) {
+            ans[indices[i]] = s.charAt(i); // Use indices[i] to determine the position in the result array
+        }
+        return String.valueOf(ans); // Convert char array to string
+    }
+}
+
+//beats 100%, memorywise - 50%
+class Solution {
+        public String restoreString(String s, int[] indices) {
+        int count = 0;
+        char[] array = new char[indices.length];
+        for(int i = 0 ; i < indices.length ; i++){
+            array[indices[i]] = s.charAt(i);
+        }
+        return new String(array);
+    }
+}

@@ -1,0 +1,25 @@
+//beats 100% and 35% in memorywise
+class Solution {
+    public static String interpret(String command) {
+        StringBuilder sb = new StringBuilder();
+        String ans = "";
+        int i = 0;
+        while(i < command.length()){
+            char ch = command.charAt(i);
+            if(ch!='('){
+                sb.append(ch);
+                i++;
+            } else{
+                if(ch == '(' && command.charAt(i+1)==')') {
+                    sb.append('o');
+                    i += 2;
+                } else{
+                    sb.append("al");
+                    i+=4;
+                }
+            }
+        }
+        ans = sb.toString();
+        return ans;
+    }
+}

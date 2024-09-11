@@ -1,0 +1,56 @@
+//beats 45% users
+class Solution {
+     public static int maximumProduct(int[] nums) {
+        if(nums.length == 3){
+            return nums[0]*nums[1]*nums[2];
+        }
+        int ans = 0;
+        int temp1=-1,temp2=-1,temp3=-1;
+        Arrays.sort(nums);
+        
+        //atleast length is 4
+        //if only 1 negative
+        if(nums[0]<0 && nums[1]>=0){
+            return nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3];
+        } else {
+            int chk1 = nums[0]*nums[1]*nums[nums.length-1];
+            int chk2 = nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3];
+            if(chk1>=chk2){
+                return chk1;
+            }
+            return chk2;
+        } 
+
+    }
+}
+//beats 85% users
+class Solution {
+    public int maximumProduct(int[] nums) {
+        int min1, min2, max1, max2, max3;
+        min1 = min2 = Integer.MAX_VALUE;
+        max1 = max2 = max3 = Integer.MIN_VALUE;
+        for(int i = 0; i < nums.length; i++){
+            if(max1 < nums[i]){
+                max3 = max2;
+                max2 = max1;
+                max1 = nums[i];
+            }else if(max2 < nums[i]){
+                max3 = max2;
+                max2 = nums[i];
+            }else if(max3 < nums[i]){
+                max3 = nums[i];
+            }
+            
+            //for inclusion of negative numbers
+            if(min1 > nums[i]){
+                min2 = min1;
+                min1 = nums[i];
+            }else if(min2 > nums[i]){
+                min2 = nums[i];
+            }
+            
+        }
+        
+        return Math.max(max1 * max2 * max3 , min1 * min2 * max1);
+    }
+}

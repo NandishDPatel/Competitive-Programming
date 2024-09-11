@@ -1,0 +1,47 @@
+//beats 9% users
+class Solution {
+    public static String sortSentence(String s) {
+        String ans = "";
+        StringBuilder sb = new StringBuilder(s);
+        HashMap<Integer,String> map = new HashMap<>();
+        int i = 0;
+        String temp = "";
+        while(i<s.length()){
+            char ch = s.charAt(i);
+            if(ch>=48 && ch<=57){
+                int pos = ch-48;
+                temp += " ";
+                map.put(pos-1,temp);
+                temp = "";
+                i++;
+            } else if(ch == 32){
+                i++;
+            } else{
+                temp+=ch; //is
+                i++;
+            }
+        }
+        for (int j = 0; j < map.size(); j++) {
+            ans += map.get(j);
+        }
+//        ans = sb.toString();
+        return ans.substring(0,ans.length()-1);
+    }
+}
+
+------------------------------------------------------------------------------
+
+//beats 100% users and 25% memory wise
+class Solution {
+   public static String sortSentence(String s){
+        String ans = null;
+        String temp[] = s.split(" ");
+        String a[] = new String[temp.length];
+        for(String str : temp){
+            int pos = Integer.parseInt((str.substring(str.length()-1,str.length())));
+            a[pos-1] = str.substring(0,str.length()-1);
+        }
+        ans = String.join(" ",a);
+        return ans;
+    }
+}

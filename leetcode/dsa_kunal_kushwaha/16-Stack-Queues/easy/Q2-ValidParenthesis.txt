@@ -1,0 +1,32 @@
+//beats 98% users
+class Solution {
+    public static boolean isValid(String s) {
+            Stack<Character> stack = new Stack<>();
+            char x = ' ';
+            int i = 0;
+            while(i!=s.length()){
+                x = s.charAt(i);
+                if(x=='(' || x=='{' || x=='['){
+                    stack.push(x);
+                } else{
+                    if(!stack.isEmpty()){
+                        if(x==')' && stack.peek()=='('){
+                            stack.pop();
+                        } else if(x=='}' && stack.peek()=='{'){
+                            stack.pop();
+                        } else if(x==']' && stack.peek()=='['){
+                            stack.pop();
+                        } else{
+                            return false;
+                        }
+                    } else{
+                        return false;
+                    }
+
+
+                }
+                i++;
+            }
+            return stack.isEmpty() ? true : false;
+        }
+}

@@ -1,0 +1,32 @@
+//beats 75% users - leetcode solution
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            map.put(nums[i], map.getOrDefault(nums[i], 1) + 1);
+        }
+         // Convert the HashMap to a list of Map.Entry
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+
+        // Sort the list based on the values
+        Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>(){
+            public int compare(Map.Entry<Integer,Integer> o1,Map.Entry<Integer,Integer> o2){
+                int compare=o1.getValue().compareTo(o2.getValue());
+                if(compare==0){
+                    compare=o2.getKey().compareTo(o1.getKey());
+                }
+                return compare;
+            }
+        });
+
+        int ind = 0;
+        for (Map.Entry<Integer, Integer> entry : list){
+            for(int j=0;j<entry.getValue()-1;j++){
+                nums[ind++] = entry.getKey();
+            }
+
+        }
+        return nums;
+
+    }
+}

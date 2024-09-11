@@ -1,0 +1,57 @@
+//beats only 5% people
+class Solution {
+    public int thirdMax(int[] nums) {
+        int len = nums.length;
+        if(len==1){
+            return nums[0];
+        }
+        if(len==2){
+            if(nums[0]>nums[1]){
+                return nums[0];
+            }
+            return nums[1];
+        }
+        for(int i=0;i<len-1;i++){
+            for(int j=i+1;j<len;j++){
+                //swap variables
+                if(nums[i]>nums[j]){
+                    int temp = nums[i];
+                    nums[i] = nums[j];
+                    nums[j] = temp;
+                } 
+            }
+        }
+        int count = 0;
+        int ans = nums[0];
+        for(int j=len-1;j>0;j--){
+            if(nums[j]!=nums[j-1]){
+                count++;
+                ans = nums[j];
+            }
+            if(count==2){
+                return nums[j-1];
+            }
+        }
+        return ans;
+    }
+}
+
+----------------------------------------
+//beats 74% users
+class Solution {
+   public static int thirdMax(int[] nums) {
+        Arrays.sort(nums);
+        int count = 1;
+        int temp = -1;
+        for(int j= nums.length-1;j>=1;j--){
+            if(nums[j]!=nums[j-1]){
+                count++;
+                temp = nums[j-1];
+            }
+            if(count==3){
+                return temp;
+            }
+        }
+        return nums[nums.length-1];
+    }
+}

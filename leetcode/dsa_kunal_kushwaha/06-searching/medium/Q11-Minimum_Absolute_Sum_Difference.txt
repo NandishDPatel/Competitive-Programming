@@ -1,0 +1,39 @@
+//beats 80% users
+import java.util.Arrays;
+
+class Solution {
+    public int minAbsoluteSumDiff(int[] nums1, int[] nums2) {
+        int MOD = 1000000007;
+        int n = nums1.length;
+
+        // Calculate initial absolute sum difference
+        int totalDiff = 0;
+        int maxGain = 0;
+
+        // Sort nums1 for efficient searching
+        int[] sortedNums1 = Arrays.copyOf(nums1, n);
+        Arrays.sort(sortedNums1);
+
+        for (int i = 0; i < n; i++) {
+            int originalDiff = Math.abs(nums1[i] - nums2[i]);
+            totalDiff = (totalDiff + originalDiff) % MOD;
+
+            // Binary search for the closest value in sortedNums1 to nums2[i]
+            int idx = Arrays.binarySearch(sortedNums1, nums2[i]);
+
+            if (idx < 0) {
+                idx = -idx - 1;
+            }
+
+            // Check if replacement can minimize the difference
+            if (idx < n) {
+                maxGain = Math.max(maxGain, originalDiff - Math.abs(sortedNums1[idx] - nums2[i]));
+            }
+            if (idx > 0) {
+                maxGain = Math.max(maxGain, originalDiff - Math.abs(sortedNums1[idx - 1] - nums2[i]));
+            }
+        }
+
+        return (totalDiff - maxGain + MOD) % MOD;
+    }
+}

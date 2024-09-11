@@ -1,0 +1,98 @@
+//beats 68.48% users
+class Solution {
+    public static int[] relativeSortArray(int[] arr1, int[] arr2) {
+        int ans[] = new int[arr1.length];
+        int temp[] = new int[arr1.length];
+        Arrays.fill(temp, -1);
+        LinkedHashMap<Integer,Integer> map = new LinkedHashMap<>();
+        int z = 0;
+        int n = 0;
+        for(int j=0;j<arr2.length;j++){
+            map.put(arr2[j],0);
+        }
+        for(int i=0;i< arr1.length;i++){
+            if(map.containsKey(arr1[i])){
+                map.put(arr1[i], map.get(arr1[i])+1);
+            } else{
+                temp[n] = arr1[i];
+                n++;
+            }
+        }
+        for (Map.Entry<Integer,Integer> entry : map.entrySet()){
+            int key = entry.getKey();
+            int val = entry.getValue();
+            for(int j=0;j<val;j++){
+                ans[z] = key;
+                z++;
+            }
+        }
+        Arrays.sort(temp);
+        int ls = temp.length-n;
+        while(z!= arr1.length){
+            ans[z] = temp[ls];
+            ls++;
+            z++;
+        }
+        return ans;
+    }
+}
+
+//beats 48.66% users
+class Solution {
+    public static int[] relativeSortArray(int[] arr1, int[] arr2) {
+            LinkedList<Integer> sortedLL = new LinkedList<>();
+            LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
+
+            for (int j = 0; j < arr2.length; j++) {
+                map.put(arr2[j], 0);
+            }
+
+            for (int i = 0; i < arr1.length; i++) {
+                if (map.containsKey(arr1[i])) {
+                    map.put(arr1[i], map.get(arr1[i]) + 1);
+                } else {
+                    sortedLLInsert(sortedLL, arr1[i]);
+                }
+            }
+
+            int[] ans = new int[arr1.length];
+            int z = 0;
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                int key = entry.getKey();
+                int val = entry.getValue();
+                for (int j = 0; j < val; j++) {
+                    ans[z] = key;
+                    z++;
+                }
+            }
+
+            int[] llArray = getArrayForLL(sortedLL);
+            System.arraycopy(llArray, 0, ans, z, llArray.length); // Copy elements from the sorted linked list to ans
+            return ans;
+        }
+
+        private static void sortedLLInsert(LinkedList<Integer> sortedLL, int val) {
+            if (sortedLL.isEmpty() || sortedLL.getFirst() >= val) {
+                sortedLL.addFirst(val);
+            } else {
+                ListIterator<Integer> iterator = sortedLL.listIterator();
+                while (iterator.hasNext()) {
+                    if (iterator.next() >= val) {
+                        iterator.previous();
+                        iterator.add(val);
+                        return;
+                    }
+                }
+                sortedLL.addLast(val);
+            }
+        }
+
+        private static int[] getArrayForLL(LinkedList<Integer> ll) {
+            int[] arr = new int[ll.size()];
+            int i = 0;
+            for (Integer val : ll) {
+                arr[i++] = val;
+            }
+            return arr;
+        }
+}

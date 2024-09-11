@@ -1,0 +1,42 @@
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        int len = intervals.length;
+        int temp[] = new int[len];
+        int result[] = new int[len];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<len;i++){
+            temp[i] = intervals[i][0];
+            map.put(intervals[i][0],i);
+        }
+        Arrays.sort(temp);
+        for(int i=0;i<len;i++){
+            int value = binSearch(temp,intervals[i][1]);
+            if(value==-1){
+                result[i] = -1;
+            } else{
+                result[i] = map.get(temp[value]);
+            }
+        }
+        return result;
+
+
+    }
+    public static int binSearch(int arr[],int result){
+            int low = 0;
+            int high = arr.length-1;
+            int ans = -1;
+            while(low<=high){
+                int mid = low + (high-low)/2;
+                if(arr[mid]==result){
+                    return mid;
+                } else if(arr[mid]>result){
+                    ans = mid;
+                    high = mid-1;
+                } else{
+                    low = mid+1;
+                }
+            }
+            return ans;
+        }
+
+}

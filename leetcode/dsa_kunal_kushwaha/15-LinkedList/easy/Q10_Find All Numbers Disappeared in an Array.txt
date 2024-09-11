@@ -1,0 +1,42 @@
+///beats 84% users
+Find All Numbers Disappeared in an Array
+class Solution {
+    public static List<Integer> findDisappearedNumbers(int[] nums){
+        List<Integer> list = new ArrayList<>();
+        int len = nums.length;
+        Arrays.sort(nums);
+        int start = nums[0];
+        if(start!=1){
+            int x = 1;
+            while(x!=start){
+                list.add(x);
+                x++;
+            }
+        }
+        int i = 0;
+        while(i<len-1){
+            if(nums[i]==nums[i+1]){
+                i++;
+            } else{
+                if(nums[i]==nums[i+1]-1){
+                    i++;
+                } else{
+                    int j = nums[i];
+                    j++;
+                    while(j!=nums[i+1]){
+                        list.add(j);
+                        j++;
+                    }
+                    i++;
+                }
+            }
+        }
+        int last = nums[nums.length - 1];
+        if (last != nums.length) {
+            for (i = last + 1; i <= nums.length; i++) {
+                list.add(i);
+            }
+        }
+        return list;
+    }
+}

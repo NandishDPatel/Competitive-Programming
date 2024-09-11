@@ -1,0 +1,55 @@
+//beats 59%
+class Solution {
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if(ch == '{' || ch=='[' || ch=='('){
+                stack.push(ch);
+            } else{
+                if(stack.empty()){
+                    return false;
+                }
+                char chk = stack.pop();
+                if(ch == '}' && chk!='{'){
+                    return false;
+                }
+                if(ch == ']' && chk!='['){
+                    return false;
+                }
+                if(ch == ')' && chk!='('){
+                    return false;
+                }
+            }
+        }
+        if(stack.empty()){
+            return true;
+        }
+        return false;
+    }
+}
+
+//beats 98% users
+class Solution {
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if(ch == '{' || ch=='[' || ch=='('){
+                stack.push(ch);
+            } else{
+                if(stack.empty()){
+                    return false;
+                }
+                char chk = stack.pop();
+                if(ch == '}' && chk!='{' || ch == ']' && chk!='[' || ch == ')' && chk!='('){
+                    return false;
+                }
+            }
+        }
+        if(stack.empty()){
+            return true;
+        }
+        return false;
+    }
+}

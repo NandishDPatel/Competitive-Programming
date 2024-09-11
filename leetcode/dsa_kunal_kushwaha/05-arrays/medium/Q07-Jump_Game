@@ -1,0 +1,26 @@
+//beats 54% users - leetcode solution
+class Solution {
+    public boolean canJump(int[] nums) {
+       int reachable = 0;
+       for(int i = 0; i < nums.length; i ++) {
+           if(i > reachable) return false;
+           reachable = Math.max(reachable, i + nums[i]);
+       }
+       return true;
+    }
+}
+
+//beats 99% users - leetcode Solution
+class Solution {
+    public boolean canJump(int[] nums) {
+        int finalPos = nums.length-1;
+        // start from second last index
+        for(int idx = nums.length-2;idx>=0;idx--){
+            if(idx+nums[idx]>= finalPos){
+                finalPos = idx;
+            }
+        }
+        // if we reach the first index then we can make jump possible
+        return finalPos == 0;
+    }
+}

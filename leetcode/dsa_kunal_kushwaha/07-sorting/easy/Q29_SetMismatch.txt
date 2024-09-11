@@ -1,0 +1,20 @@
+//beats 100% - 1ms
+class Solution {
+public static int[] findErrorNums(int[] nums){
+        int chk[] = new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            chk[nums[i]-1] += 1;
+        }
+        int duplicate = -1;
+        int missNumber = -1;
+        for (int i = 0; i < chk.length; i++) {
+            if(chk[i]==0){
+                missNumber = i+1;
+            }
+            if(chk[i] == 2){
+                duplicate = i+1;
+            }
+        }
+        return new int[]{duplicate,missNumber};
+    }
+}

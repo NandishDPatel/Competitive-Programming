@@ -1,0 +1,51 @@
+//beats only 9%
+class Solution {
+     public static String defangIPaddr(String address) {
+        int len = address.length();
+        String ans = "";
+        if(address.charAt(0)=='.'){
+            ans+="[.]";
+        } else{
+            ans+=address.charAt(0);
+        }
+        for (int i = 0; i < len-1; i++) {
+            if(address.charAt(i+1)!='.'){
+                ans+=address.charAt(i+1);
+            } else{
+                ans+="[.]";
+            }
+        }
+        return ans;
+    }
+}
+
+//beats 100%
+class Solution {
+     public static String defangIPaddr(String address) {
+        int len = address.length();
+        String ans = address.replace(".","[.]");
+        return ans;
+    }
+}
+
+//beats 100%
+class Solution {
+     public static String defangIPaddr(String address) {
+        //Instead of using String use StringBuilder as it won't create a new instance every time. In string if I do;
+        // String ans = " "
+        //ans += 's'; //ans = s
+        // ans+='nandish' //snandish 
+        //every times create a new object :(
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < address.length(); i++) {
+            char ch = address.charAt(i);
+            if (ch == '.') {
+                result.append("[.]");
+            } else {
+                result.append(ch);
+            }
+        }
+
+        return result.toString();
+    }
+}

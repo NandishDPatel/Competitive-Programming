@@ -1,0 +1,60 @@
+//beats 100% users
+class Solution {
+    public int search(int[] nums, int target) {
+        if(nums.length==1){
+            if(nums[0]==target){
+                return 0;
+            } else{
+                return -1;
+            }
+        }
+        //find peak element
+        int peak = findPeakEle(nums);
+        // System.out.println(peak);
+
+        //apply binary 1st half
+        int check1 = binarySearch(nums,target,0,peak);
+        if(check1!=-1 && nums[check1]==target){
+            return check1;
+        }
+        int check2 = binarySearch(nums,target,peak+1,nums.length-1);
+        if(check2!=-1 && nums[check2]==target){
+            return check2;
+        }
+        return -1;
+    }
+    public int findPeakEle(int[] nums){
+        int low = 0;
+        int high = nums.length-1;
+        int mid = -1;
+        while(low<=high){
+            mid = low + (high-low)/2 ;
+            if(mid!=nums.length-1 && nums[mid]>nums[mid+1]){
+                return mid;
+            } else{
+                if(nums[mid]>=nums[0]){
+                    low = mid+1;
+                } else{
+                    high = mid-1;
+                }
+            }
+        }
+        return 1;
+    }
+    public int binarySearch(int nums[],int target,int low,int high){
+        int l = low;
+        int h = high;
+        int mid = -1;
+        while(l<=h){
+            mid = l + (h-l)/2;
+            if(nums[mid]==target){
+                return mid;
+            } else if(nums[mid]>target){
+                h = mid-1;
+            } else {
+                l = mid+1;
+            }
+        }
+        return -1;
+    }
+}

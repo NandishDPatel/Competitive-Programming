@@ -1,0 +1,36 @@
+//beats 100% users (used chatgpt)
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxDepth(TreeNode root) {
+    return helper(root, 0); // Start depth count from 0
+}
+
+public int helper(TreeNode root, int depth) {
+    if (root == null) {
+        return depth; // Return the current depth when reaching a leaf node
+    }
+
+    // Recur for left and right subtrees, incrementing depth
+    int leftDepth = helper(root.left, depth + 1);
+    int rightDepth = helper(root.right, depth + 1);
+
+    // Return the maximum depth from left and right subtrees
+    return Math.max(leftDepth, rightDepth);
+}
+
+}

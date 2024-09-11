@@ -1,0 +1,14 @@
+//gkg
+class Solution {
+    static String armstrongNumber(int n){
+        int check = 0;
+        int ans = 0;
+        while(n>0){
+            check = n%10;
+            ans += (Math.pow(check,3));
+            n = n/10;
+        }
+        // System.out.println(ans);
+        return (ans==n) ? "Yes" : "No";
+    }
+}

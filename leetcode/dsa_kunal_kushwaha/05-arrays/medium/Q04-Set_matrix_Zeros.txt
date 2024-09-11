@@ -1,0 +1,108 @@
+//beats 73% users
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        List<List<Integer>> positions = new ArrayList<>();
+
+        for(int i=0;i<matrix.length;i++){
+
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(i);
+                    temp.add(j);
+                    positions.add(temp);
+                }
+            }
+        }
+
+        for (List<Integer> innerList : positions) {
+            int curR = innerList.get(0);
+            int curC = innerList.get(1);
+            //ele to top
+            for(int i=curR;i>=0;i--){
+                matrix[i][curC] = 0;
+            }
+            //ele to bottom
+            for(int i=curR;i<=matrix.length-1;i++){
+                matrix[i][curC] = 0;
+            }
+            //ele to left
+            for(int i=curC;i>=0;i--){
+                matrix[curR][i] = 0;
+            }
+            //ele to right
+            for(int i=curC;i<=matrix[0].length-1;i++){
+                matrix[curR][i] = 0;
+            }
+        }
+    }
+}
+
+//below is slightly modified but same 73% users are beaten
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        List<Integer> rows = new ArrayList<>();
+        List<Integer> cols = new ArrayList<>();
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    rows.add(i);
+                    cols.add(j);
+                }
+            }
+        }
+        for(int j=0;j<rows.size();j++){
+            int curR = rows.get(j);
+            int curC = cols.get(j);
+            //ele to top
+            for(int i=curR;i>=0;i--){
+                matrix[i][curC] = 0;
+            }
+            //ele to bottom
+            for(int i=curR;i<=matrix.length-1;i++){
+                matrix[i][curC] = 0;
+            }
+            //ele to left
+            for(int i=curC;i>=0;i--){
+                matrix[curR][i] = 0;
+            }
+            //ele to right
+            for(int i=curC;i<=matrix[0].length-1;i++){
+                matrix[curR][i] = 0;
+            }
+        }
+    }
+}
+//beats 100% users
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        boolean[] zeroRows = new boolean[rows];
+        boolean[] zeroCols = new boolean[cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    zeroRows[i] = true;
+                    zeroCols[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            if (zeroRows[i]) {
+                for (int j = 0; j < cols; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        for (int j = 0; j < cols; j++) {
+            if (zeroCols[j]) {
+                for (int i = 0; i < rows; i++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}

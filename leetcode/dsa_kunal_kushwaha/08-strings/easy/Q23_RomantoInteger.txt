@@ -1,0 +1,53 @@
+//beats 59.35%-68.59% users
+class Solution {
+     public static int romanToInt(String s) {
+        int ans = 0;
+        int j = 0;
+        HashMap<Character,Integer> map = new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+        while(j<s.length()-1){
+            char ch = s.charAt(j);
+            char temp = s.charAt(j+1);
+            int intCh = map.get(ch);
+            int intTemp = map.get(temp);
+            if(intCh>=intTemp){
+                ans += intCh;
+                j++;
+            } else{
+                ans += (intTemp-intCh);
+                j+=2;
+            }
+        }
+        if(j==s.length()-1){
+            ans += map.get(s.charAt(j));
+        }
+        return ans;
+    }
+}
+
+//beats 100% users
+class Solution {
+    public int romanToInt(String s) {
+        int ans = 0, num = 0;
+        for (int i = s.length()-1; i >= 0; i--) {
+            switch(s.charAt(i)) {
+                case 'I': num = 1; break;
+                case 'V': num = 5; break;
+                case 'X': num = 10; break;
+                case 'L': num = 50; break;
+                case 'C': num = 100; break;
+                case 'D': num = 500; break;
+                case 'M': num = 1000; break;
+            }
+            if (4 * num < ans) ans -= num;
+            else ans += num;
+        }
+        return ans;
+    }
+}

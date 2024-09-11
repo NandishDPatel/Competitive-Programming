@@ -1,0 +1,15 @@
+class Solution:
+    def isPalindrome(self, x: int):
+        y = str(x)
+        z = len(y)
+        arr = list(y)
+        # print(arr)
+        ans = True
+        for i in range(z//2):
+            if(arr[i]!=arr[z-i-1]):
+                ans = False
+                break
+        return ans
+
+
+            

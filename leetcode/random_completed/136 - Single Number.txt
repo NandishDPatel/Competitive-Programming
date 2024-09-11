@@ -1,0 +1,16 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        #nums = [4,1,2,1,2]
+        #empty dictionary creation
+        freq = {}
+        for i in range(len(nums)):
+            if nums[i] in freq:
+                freq[nums[i]] += 1
+            else:
+                freq[nums[i]] = 1
+        # print(freq)
+        ans = 0
+        for k,v in freq.items():
+            if v==1:
+                ans = k
+        return (ans)

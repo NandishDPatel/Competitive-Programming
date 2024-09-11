@@ -1,0 +1,14 @@
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if(n==0):
+            return False
+        else:
+            chk = 0
+            pwr = 2**chk
+            while(pwr<=n):
+                chk+=1
+                pwr = 2**chk
+            if((pwr/2)%n==0):
+                return True
+            else:
+                return False

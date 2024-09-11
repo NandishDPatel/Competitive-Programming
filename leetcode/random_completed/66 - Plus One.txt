@@ -1,0 +1,13 @@
+digits = [9]
+x = len(digits)
+total = 0
+y = 0
+for i in range(x):
+    y = digits[i]*(10**(x-i-1))
+    total += y
+    
+ans = total+1
+print("Ans:-",ans)
+
+result = [int(x) for x in str(ans)]
+print(result)

@@ -1,0 +1,17 @@
+class Solution {
+    public int subtractProductAndSum(int n) {
+        // Scanner sc = new Scanner(System.in);
+        // System.out.print("Enter an integer : ");
+        // int num = sc.nextInt();
+        int sumDigit = 0;
+        int productDigit = 1;
+        while(n>0){
+            int rem = n%10;
+            sumDigit += rem;
+            productDigit *= rem;
+            n = n/10;
+        }
+        int ans = productDigit-sumDigit;
+        return ans;
+    }
+}

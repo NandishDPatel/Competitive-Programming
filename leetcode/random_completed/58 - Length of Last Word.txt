@@ -1,0 +1,18 @@
+s = "   fly me   to   the moon  "
+# s = "Hello World"
+# s = "luffy is still joyboy"
+lst = list(s)
+x = len(s)
+c = 0
+start = x-1
+for i in range(len(s)-1,-1,-1):
+    if(s[i] != " "):
+        start = i
+        break
+ans = 0    
+for j in range(start,-1,-1):
+    if(s[j] != " "):
+        ans += 1
+    else:
+        break
+print(ans)

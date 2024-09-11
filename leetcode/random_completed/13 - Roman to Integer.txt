@@ -1,0 +1,22 @@
+class Solution:
+    def romanToInt(self, s: str):
+        lst= list(s)
+        sz = len(lst)
+        ans = 0
+
+        prio = {'IV':4,'IX':9,'XL':40,'XC':90,'CD':400,'CM':900}
+        prioChk = ['IV','IX','XL','XC','CD','CM']
+        dict = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        total = 0
+        minus = 0
+        for i in range(sz-1):
+            join = lst[i]+lst[i+1]
+            if join in prioChk:
+                total += prio[join]
+                minus += dict[lst[i]]
+                minus += dict[lst[i+1]]
+                
+        for j in range(sz):
+            ans += dict[lst[j]]
+
+        return ans+total-minus

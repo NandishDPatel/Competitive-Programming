@@ -1,0 +1,23 @@
+haystack = "mississipppi"
+needle = "issip"
+ans = False
+i=0
+count=0
+while(i!=len(haystack)):
+    if(haystack[i]==needle[0]):
+        if(i+len(needle)-1<len(haystack)):
+            count = 0
+            for j in range(len(needle)):
+                if(needle[j]==haystack[i+j]):
+                    count+=1
+        i+=1
+    else:
+        i+=1
+    if(count==len(needle)):
+        ans = True
+        start = i-1
+        break
+if(ans):
+    print(start)
+else:
+    print(-1)

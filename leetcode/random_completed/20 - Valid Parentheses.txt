@@ -1,0 +1,22 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        ans = "false"
+        lst = []
+        chk1 = ['(','[','{']
+        for i in range(len(s)):
+            if s[i] in chk1:
+                lst.append(s[i])
+            else:
+                if(s[i]==")" and lst[-1]=='('):
+                    lst.pop()
+                if(s[i]=="}" and lst[-1]=="{"):
+                    lst.pop()
+                if(s[i]=="]" and lst[-1]=='['):
+                    lst.pop()
+                
+        if(len(lst)==0):
+            ans = "true"
+        else:
+            ans = "false"
+            
+        return ans

@@ -1,0 +1,13 @@
+n = 3
+if(n<=2):
+    print(n)
+else:
+    lst = [0]*(n)
+    lst[-1] = 1
+    lst[-2] = 1
+    print(lst)
+    for j in range(n-3,-1,-1):
+        lst[j] = lst[j+1] + lst[j+2]
+print(lst)
+print(lst[0]+lst[1])
+#it forms a fibonacci sequence and also this problem solved using the dynamic programming concept so that we only have to iterate throught the loop only once

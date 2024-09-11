@@ -1,0 +1,38 @@
+//shows TLE (Time Limit Exceeded error)
+class Solution {
+    public int hammingWeight(int n) {
+        int sp = startingPos(n);//3
+        // System.out.println(sp);
+        int ans = 0;
+        while(n>0){
+            long temp = (long)Math.pow(2,sp);
+            if(temp<=n){
+                ans++;
+                n -= (int)temp;
+                System.out.println(n);
+            }
+            sp--;
+        }
+        return ans;
+    }
+    public int startingPos(int n){
+        int i = 0;
+        // System.out.println(Math.pow(2,i));
+        while((int)Math.pow(2,i)<=n){
+            i++;
+        }
+        return i-1;
+    }
+}
+
+//chatgpt solution - beats 100% users
+class Solution {
+    public int hammingWeight(int n) {
+        int count = 0;
+        while (n != 0) {
+            count += n & 1; // Add 1 to count if the last bit is 1
+            n >>>= 1; // Unsigned right shift to discard the last bit
+        }
+        return count;
+    }
+}

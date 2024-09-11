@@ -1,0 +1,27 @@
+//beats 100% users
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        // StringBuilder sb = new StringBuilder();
+        if(strs.length==1){
+            return strs[0];
+        }
+        String result = "";
+        int minLen = 201;
+        for(int j=0;j<strs.length;j++){
+            if(strs[j].length()<minLen){
+                minLen = strs[j].length();
+            }
+        }
+        for (int i = 0; i < minLen; i++) {
+            char currentChar = strs[0].charAt(i);
+            for (int j = 1; j < strs.length; j++) {
+                if (strs[j].charAt(i) != currentChar) {
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+
+        // If we finish the loop, the entire shortest string is a common prefix
+        return strs[0].substring(0, minLen);
+    }
+}

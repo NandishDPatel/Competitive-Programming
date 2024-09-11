@@ -1,0 +1,50 @@
+//beats 62% users
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int i = 0;
+        int j = 0;
+        while(i!=s.length() && j!=t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+                j++;
+            } else{
+                j++;
+            }
+        }
+        if(i==s.length()){
+            return true;
+        }
+        return false;
+    }
+}
+
+//beats 62% users using stack as well :(
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.length()==0){
+            return true;
+        }
+        Stack<Character> stack = new Stack<>();
+        int i = s.length()-1;
+        while(i!=-1){
+            stack.push(s.charAt(i));
+            i--;
+        }
+        int j = 0;
+        while(j!=t.length()){
+            if(stack.isEmpty()){
+                return true;
+            }
+            if(t.charAt(j)==stack.peek()){
+                stack.pop();
+            }
+            j++;
+        }
+        if(stack.isEmpty()){
+                return true;
+            }
+        return false;
+    }
+}
+
+//beats

@@ -1,0 +1,64 @@
+//beats 57% users
+class Solution {
+    public int romanToInt(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        map.put('I',0);
+        map.put('V',1);
+        map.put('X',2);
+        map.put('L',3);
+        map.put('C',4);
+        map.put('D',5);
+        map.put('M',6);
+        int values[] = {1,5,10,50,100,500,1000};
+        int i = s.length()-1;
+        int ans = 0;
+        int pos = -1;
+        int chAdd = 0;
+        char nextChar = ' ';
+        while(i>=0){
+            char ch = s.charAt(i);
+            pos = map.get(ch);
+            if(ch == 'I' || i==0){
+                ans += values[map.get(ch)];
+                i--;
+            } else{
+                if(i!=0){
+                     nextChar = s.charAt(i-1);
+                } else{
+                    nextChar = 'M';
+                }
+                int temp = values[map.get(ch)];//5
+                if(map.get(nextChar)>=pos){
+                    ans += temp;
+                    i--;
+                } else{
+                    int temp2 = values[map.get(nextChar)];
+                    ans += (temp-temp2);
+                    i-=2;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+//beats 100% users - leetcode Solutionclass Solution
+class Solution {
+     public int romanToInt(String s) {
+         int ans = 0, num = 0;
+        for (int i = s.length()-1; i >= 0; i--) {
+            switch(s.charAt(i)) {
+                case 'I': num = 1; break;
+                case 'V': num = 5; break;
+                case 'X': num = 10; break;
+                case 'L': num = 50; break;
+                case 'C': num = 100; break;
+                case 'D': num = 500; break;
+                case 'M': num = 1000; break;
+            }
+            if (4 * num < ans) ans -= num;
+            else ans += num;
+        }
+        return ans;
+    }
+}

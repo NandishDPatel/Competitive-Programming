@@ -1,0 +1,23 @@
+//beats 100% users - used chatgpt
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length <= 2) {
+            return nums.length;
+        }
+        int j = 1; // Start from the second position
+        int count = 1; // Initial count for the first element
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                count++;
+            } else {
+                count = 1; // Reset count for a new element
+            }
+            
+            if (count <= 2) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+}

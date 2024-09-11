@@ -1,0 +1,20 @@
+//beats 100% users
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root==null){
+            return false;
+        }
+        return helper(root,targetSum);
+    }
+    public boolean helper(TreeNode root,int checkSum){
+        if(root==null){
+            return false;
+        }
+        if(root.left==null && root.right==null){
+            return checkSum==root.val;
+        }
+        checkSum -= root.val; //0
+        return helper(root.left,checkSum) || helper(root.right,checkSum);
+        //h1(2,0) || h2()
+    }
+}

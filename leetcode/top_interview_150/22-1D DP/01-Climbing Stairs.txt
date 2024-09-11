@@ -1,0 +1,36 @@
+//used recursion = exponential time complexity
+class Solution {
+    public int climbStairs(int n) {
+        if(n<=2){
+            return n;
+        }
+        return countWays(n);
+    }
+    public int countWays(int n){
+        if(n<=2){
+            return n;
+        }
+        return countWays(n-1) + countWays(n-2);
+    }
+}
+
+//chatgpt solution
+class Solution {
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        // Initialize the base cases
+        int first = 1;
+        int second = 2;
+
+        // Use a loop to calculate the number of ways to climb to the nth step
+        for (int i = 3; i <= n; i++) {
+            int current = first + second;
+            first = second;
+            second = current;
+        }
+        return second;
+    }
+}

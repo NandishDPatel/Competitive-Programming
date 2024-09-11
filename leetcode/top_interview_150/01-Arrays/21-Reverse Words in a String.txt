@@ -1,0 +1,27 @@
+//beats 84% users
+class Solution {
+    public String reverseWords(String s) {
+        int j = s.length()-1;
+        char[] arr = new char[j+1];        
+        arr = s.toCharArray();
+        StringBuilder ans = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        while(j>=0){
+            if(arr[j]==' '){
+                if(sb.length()>0){
+                    ans.append(sb.toString()+" ");
+                    sb.setLength(0);
+                }  
+                j--;
+            } else{
+                sb.insert(0,arr[j]);
+                j--;    
+            }
+        }
+        if(sb!=null){
+            ans.append(sb.toString());
+        }
+        return ans.toString().trim();        
+    }
+}
+

@@ -1,0 +1,47 @@
+//beats 18% users
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        int i = 0;
+        HashMap<Character,Character> map1 = new HashMap<>();
+        HashMap<Character,Character> map2 = new HashMap<>();
+        while(i!=s.length()){
+            char curr1 = s.charAt(i);
+            char curr2 = t.charAt(i);
+            if(!map1.containsKey(curr1)){
+                map1.put(curr1,curr2);
+            } else{
+                if(map1.get(curr1)!=curr2){
+                    return false;
+                }
+            }
+            if(!map2.containsKey(curr2)){
+                map2.put(curr2,curr1);
+            } else{
+                if(map2.get(curr2)!=curr1){
+                    return false;
+                }
+            }
+            i++;
+        }
+        return true;
+    }
+}
+
+//beats 90% users - leetcode Solution
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] indexS = new int[200];
+        int[] indexT = new int[200];
+        int len = s.length();
+        for(int i = 0; i < len; i++) {
+            if(indexS[s.charAt(i)] != indexT[t.charAt(i)]) {
+                return false; }
+            indexS[s.charAt(i)] = i + 1;
+            indexT[t.charAt(i)] = i + 1;
+        }
+        return true;
+    }
+}

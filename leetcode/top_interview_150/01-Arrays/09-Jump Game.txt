@@ -1,0 +1,15 @@
+//beats 99% users
+class Solution {
+    public boolean canJump(int[] nums) {
+        int jumpNeeded = nums.length-1;
+        if(jumpNeeded==0){
+            return true;
+        }
+        for(int i=nums.length-2;i>=0;i--){
+            if(nums[i]+i>=jumpNeeded){
+                jumpNeeded = i;
+            }
+        }
+        return jumpNeeded==0 ? true : false;
+    }
+}

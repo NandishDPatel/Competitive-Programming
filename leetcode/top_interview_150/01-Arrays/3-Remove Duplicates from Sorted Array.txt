@@ -1,0 +1,82 @@
+//beats 74% users
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length==1){
+            return 1;
+        }
+        int k = nums.length;
+        //count total duplicates
+        int dupli = 0;
+        int prev = nums[0];
+        int curr = 1;
+        while(curr!=nums.length){
+            if(nums[curr]==prev){
+                dupli++;
+                curr++;
+            } else{
+                prev = nums[curr];
+                curr++;
+            }
+        }
+        // System.out.println(dupli);
+        curr = 1;
+        prev = 0;
+        while(curr!=(nums.length)){
+            if(nums[prev] == nums[curr]){
+                curr++;
+            } else{
+                prev++;
+                nums[prev] = nums[curr];
+                curr++;
+            }
+        }
+        if(dupli==0){
+            return nums.length;
+        }
+        curr = nums.length-dupli;
+        while(curr!=nums.length-1){
+            nums[curr] = -1;
+            curr++;
+        }
+        return k-dupli;
+    }
+}
+
+//beats 11% users only
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            set.add(nums[i]);
+        }
+        int curr = 0;
+        int newEle = 0;
+        while(curr<nums.length){
+            if(set.contains(nums[curr])){
+                nums[newEle] = nums[curr];
+                set.remove(nums[curr]);
+                newEle++;
+            }
+            curr++;
+        }
+        int ans = newEle;
+        while(newEle!=nums.length){
+            nums[newEle++] = -1;
+        }
+        return ans;
+    }
+}
+
+//beats 100% users - leetcode solution
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int unique = 1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                nums[unique] = nums[i];
+                unique++;
+            }
+        }
+        return unique;
+    }
+}

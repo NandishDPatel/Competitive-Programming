@@ -1,0 +1,85 @@
+//beats 27% users
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        for(int j=0;j<t.length();j++){
+            char ch = t.charAt(j);
+            if(!(map.containsKey(ch))){
+                return false;
+            } else{
+                if(map.get(ch)!=0){
+                    map.put(ch,map.get(ch)-1);
+                } else{
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+//beats 54% users
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        int temp[] = new int[26];
+        for(int i=0;i<s.length();i++){
+            int ch1 = s.charAt(i)-'a';
+            int ch2 = t.charAt(i)-'a';
+            temp[ch1]++;
+            temp[ch2]--;
+        }
+        for(int i=0;i<26;i++){
+            if(temp[i]!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+//beats 74% users
+class Solution {
+    public boolean isAnagram(String s, String t){
+        if(s.length()!=t.length()) return false;
+        int n=s.length();
+        int freqS[]=new int[27];
+        int freqT[]=new int[27];
+        //store the frequency of each character in s and t separately
+        for(int i=0;i<n;i++){
+            freqS[s.charAt(i)-97]++;
+            freqS[t.charAt(i)-97]--;
+        }
+        //check if the frequency of every character in s is same in t or not
+        for(int i=0;i<27;i++){
+            if(freqS[i]!=0) return false;
+        }
+        return true;
+    }
+}
+//beats 99% users
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int[] freq = new int[26];
+        for(char ch : s.toCharArray()){
+            freq[ch-'a'] += 1;
+        }
+        for(char ch : t.toCharArray()){
+            freq[ch-'a'] -= 1;
+        }
+        for(int i : freq){
+            if(i!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+}

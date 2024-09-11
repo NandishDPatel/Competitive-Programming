@@ -1,0 +1,89 @@
+//beats 79% users
+class Solution {
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        if(nums.length==0){
+            return result;
+        }
+        int i = 1;
+        int check1 = nums[0];
+        int check2 = nums[0];
+        String temp = "";
+        while(i!=nums.length){
+            if(nums[i]==nums[i-1]+1){
+                check2 = nums[i];
+                i++;
+            } else{
+                if(check1==check2){
+                    temp = ""+check1;
+                    // System.out.println("1 => "+temp);
+                    result.add(temp);
+                } else {
+                    temp = "" + check1 + "->" + check2;
+                    // System.out.println("2 => " + temp);
+                    result.add(temp);
+                }
+                if(i<nums.length){
+                    check1 = nums[i];
+                    check2 = nums[i];
+                }
+                i++;
+            }
+        }
+        if(check1==check2){
+            temp = ""+check1;
+            result.add(temp);
+        } else{
+            temp = "" + check1 + "->" + check2;
+            // System.out.println("2 => " + temp);
+            result.add(temp);
+        }
+        return result;
+    }
+}
+
+//beats 100% users
+class Solution {
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        if(nums.length==0){
+            return result;
+        }
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        int check1 = nums[0];
+        int check2 = nums[0];
+        while(i!=nums.length){
+            if(nums[i]==nums[i-1]+1){
+                check2 = nums[i];
+                i++;
+            } else{
+                if(check1==check2){
+                    sb.append(check1);
+                    result.add(sb.toString());
+                } else {
+                    sb.append(check1);
+                    sb.append("->");
+                    sb.append(check2);
+                    result.add(sb.toString());
+                }
+                if(i<nums.length){
+                    check1 = nums[i];
+                    check2 = nums[i];
+                }
+                sb.setLength(0);
+                i++;
+            }
+        }
+        if(check1==check2){
+            sb.append(check1);
+            result.add(sb.toString());
+        } else{
+            sb.append(check1);
+            sb.append("->");
+            sb.append(check2);
+            result.add(sb.toString());
+        }
+        return result;
+    }
+}

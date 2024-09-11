@@ -1,0 +1,73 @@
+//beats 32% users
+class Solution {
+    public int singleNumber(int[] nums) {
+        if(nums.length==1){
+            return nums[0];
+        }
+        Arrays.sort(nums);
+        int i = 0;
+        while(i<nums.length-1){
+            if(nums[i]==nums[i+1]){
+                i+=2;
+            } else{
+                return nums[i];
+            }
+        }
+        return nums[i];
+    }
+}
+
+//beats 25% only using hashset :(
+class Solution {
+    public int singleNumber(int[] nums) {
+        if(nums.length==1){
+            return nums[0];
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(set.contains(nums[i])){
+                set.remove(nums[i]);
+            } else{
+                set.add(nums[i]);
+            }
+        }
+        int x = -1;
+        for(Integer num : set){
+            x = num;
+        }
+        return x;
+    }
+}
+
+//beats 25% only
+class Solution {
+    public int singleNumber(int[] nums) {
+        if(nums.length==1){
+            return nums[0];
+        }
+        int sum = 0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                sum -= nums[i];
+            } else{
+                map.put(nums[i],i);
+                sum += nums[i];
+            }
+        }
+        return sum;
+    }
+}
+
+//beats 100% - leetcode Solution
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans=nums[0];
+        int i=0;
+        while(i<nums.length-1){
+            ans=ans^nums[i+1];
+            i++;
+        }
+        return ans;
+    }
+}

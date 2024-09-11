@@ -1,0 +1,49 @@
+//beats 86% users
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0){
+            return 0;
+        }
+        if(x<3){
+            return 1;
+        }
+        long low = 1;
+        long high = x/2;
+        while(low<=high){
+            long mid = (long)(low + (high-low)/2);
+            if(mid*mid == (long)x){
+                return (int)mid;
+            } else if(mid*mid < (long)x){
+                low = mid+1;
+            } else{
+                high = mid-1;
+            }
+        }
+        return (int)high;
+    }
+}
+
+//beats 86% - if I use log-2
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0){
+            return 0;
+        }
+        if(x<3){
+            return 1;
+        }
+        long low = 1;
+        long high = (int)(x/Math.log(2));
+        while(low<=high){
+            long mid = (long)(low + (high-low)/2);
+            if(mid*mid == (long)x){
+                return (int)mid;
+            } else if(mid*mid < (long)x){
+                low = mid+1;
+            } else{
+                high = mid-1;
+            }
+        }
+        return (int)high;
+    }
+}

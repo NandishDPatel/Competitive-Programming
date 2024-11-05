@@ -1,0 +1,15 @@
+//100%
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int maxWealth = 0;
+        int currWealth = 0;
+        for(int i=0;i<accounts.length;i++){
+            currWealth = 0;
+            for(int j=0;j<accounts[i].length;j++){
+                currWealth += accounts[i][j];
+            }
+            maxWealth = (currWealth>maxWealth) ? currWealth : maxWealth;
+        }
+        return maxWealth;
+    }
+}

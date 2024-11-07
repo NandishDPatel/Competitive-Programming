@@ -1,0 +1,60 @@
+//54%
+class Solution {
+    public boolean isPalindrome(String s) {
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        while(i!=s.length()){
+            char c = s.charAt(i);
+            if (Character.isLetterOrDigit(c)) { // Check if character is alphanumeric
+                if (Character.isUpperCase(c)) {
+                    sb.append(Character.toLowerCase(c));
+                } else {
+                    sb.append(c);
+                }
+            }
+            i++;
+        }
+        i = 0;
+        int j = sb.length()-1;
+        while(i<j){
+            if(sb.charAt(i)==sb.charAt(j)){
+                i++;
+                j--;
+            } else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+//98%
+class Solution {
+    public boolean isPalindrome(String s) {
+        int i = 0;
+        int j = s.length() - 1;
+        
+        while (i < j) {
+            char ch1 = s.charAt(i);
+            char ch2 = s.charAt(j);
+            
+            if (!Character.isLetterOrDigit(ch1)) {
+                i++;
+                continue; //skip to the next iteration 
+            }
+            if (!Character.isLetterOrDigit(ch2)) {
+                j--;
+                continue;
+            }
+            
+            if (Character.toLowerCase(ch1) != Character.toLowerCase(ch2)) {
+                return false;
+            }
+            
+            i++;
+            j--;
+        }
+        
+        return true;
+    }
+}

@@ -1,0 +1,13 @@
+//geeksForGeeks - 100% 
+
+class Solution{
+    static long factorial(int N){
+        // code here
+        long result = 1;
+        while(N>1){
+            result *= N;
+            N--;
+        }
+        return result;
+    }
+}

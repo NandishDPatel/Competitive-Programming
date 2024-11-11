@@ -1,0 +1,10 @@
+//77%
+class Solution {
+    public int maximumProduct(int[] nums) {
+        Arrays.sort(nums);
+        int check1 = nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3];
+        int check2 = nums[0]*nums[1]*nums[nums.length-1];
+        return (check1>check2) ? check1 : check2;
+    }
+}
+

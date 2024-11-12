@@ -1,0 +1,88 @@
+//52%
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[][] mat = new int[m][n];
+        int rowStart = 0;
+        int colStart = 0;
+        for(int i=0;i<indices.length;i++){
+            int ri = indices[i][0];
+            int ci = indices[i][1];
+            rowStart = 0;
+            colStart = 0;
+            for(int r1=0;r1<mat[0].length;r1++){
+                mat[ri][r1]++;
+            }
+            for(int c1=0;c1<mat.length;c1++){
+                mat[c1][ci]++;
+            }
+        }
+        int ans = 0;
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j]%2!=0){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+//18%
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[][] mat = new int[m][n];
+        int rowStart = 0;
+        int colStart = 0;
+        int ans = 0;
+        for(int i=0;i<indices.length;i++){
+            int ri = indices[i][0];
+            int ci = indices[i][1];
+            rowStart = 0;
+            colStart = 0;
+            for(int r1=0;r1<mat[0].length;r1++){
+                mat[ri][r1]++;
+                if(mat[ri][r1]%2!=0){
+                    ans++;
+                } else{
+                    ans--;
+                }
+            }
+            for(int c1=0;c1<mat.length;c1++){
+                mat[c1][ci]++;
+                if(mat[c1][ci]%2!=0){
+                    ans++;
+                } else{
+                    ans--;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+//100%
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int[] rowCount = new int[m];
+        int[] colCount = new int[n];
+        for(int[] ind : indices){
+            rowCount[ind[0]]++;
+            colCount[ind[1]]++;
+        }
+        int oddRows=0,oddCols=0;
+        for(int row: rowCount){
+            if(row%2!=0){
+                oddRows++;
+            }
+        }
+        for(int col: colCount){
+            if(col%2!=0){
+                oddCols++;
+            }
+        }
+        int ans = oddRows*n + oddCols*m - (2*oddRows*oddCols);
+
+        return ans;
+    }
+}

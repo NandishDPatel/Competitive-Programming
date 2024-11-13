@@ -1,0 +1,13 @@
+// 561 - 98%
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int i = 0;
+        int result = 0;
+        while(i<nums.length){
+            result += nums[i];
+            i+=2;
+        }
+        return result;
+    }
+}

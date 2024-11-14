@@ -1,0 +1,30 @@
+//69 - 86%
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0){
+            return 0;
+        }
+        if(x<4){
+            return 1;
+        }
+        return findRoot(x);
+    }
+    private int findRoot(int num){
+        int low = 2;
+        int high = num/2;
+        int mid = -1;
+        int ans = -1;
+        while(low<=high){
+            mid = low + (high-low)/2;
+            if((long)mid*mid == (long)num){
+                return mid;
+            } else if((long)mid*mid>(long)num){
+                high = mid-1;
+            } else{
+                ans = mid;
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+}

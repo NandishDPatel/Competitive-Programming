@@ -1,0 +1,16 @@
+//1108 - 100%
+class Solution {
+    public String defangIPaddr(String address) {
+        StringBuilder sb = new StringBuilder();
+        char ch = 'x';
+        for(int i=0;i<address.length();i++){
+            ch = address.charAt(i);
+            if(ch!='.'){
+                sb.append(ch);
+            } else{
+                sb.append("[.]");
+            }
+        }
+        return sb.toString();
+    }
+}

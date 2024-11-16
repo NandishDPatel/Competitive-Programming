@@ -1,0 +1,22 @@
+//1678 - 100%
+class Solution {
+    public String interpret(String command) {
+        StringBuilder sb = new StringBuilder();
+        char ch = 'x';
+        int i =0;
+        while(i<command.length()){
+            ch = command.charAt(i);
+            if(ch=='G'){
+                sb.append(ch);
+                i++;
+            } else if(ch=='(' && command.charAt(i+1)=='a'){
+                sb.append("al");
+                i+=4;
+            } else{
+                sb.append('o');
+                i+=2;
+            }
+        }
+        return sb.toString();
+    }
+}

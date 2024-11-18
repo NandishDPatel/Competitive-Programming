@@ -1,0 +1,12 @@
+//1732 - 100%
+class Solution {
+    public int largestAltitude(int[] gain) {
+        int highestAlt = 0;
+        int reached = 0;
+        for(int i=0;i<gain.length;i++){
+            reached += (gain[i]);
+            highestAlt = reached>highestAlt ? reached : highestAlt;
+        }
+        return highestAlt;
+    }
+}

@@ -1,0 +1,25 @@
+//367 - 100%
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        if(num==1){
+            return true;
+        }
+        return checkSquare(num);
+    }
+    private boolean checkSquare(int num){
+        int low = 1;
+        int high = num/2;
+        int mid = -1;
+        while(low<=high){
+            mid = low + (high-low)/2;
+            if((long)mid*mid==(long)num){
+                return true;
+            } else if((long)mid*mid<(long)num){
+                low = mid+1;
+            } else{
+                high = mid-1;
+            }
+        }
+        return false;
+    }
+}

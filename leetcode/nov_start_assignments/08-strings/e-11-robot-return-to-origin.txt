@@ -1,0 +1,58 @@
+//657 - 30%
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int temp[] = new int[2];
+        for(int i=0;i<moves.length();i++){
+            if(moves.charAt(i)=='L'){
+                temp[0]++;
+            } else if(moves.charAt(i)=='R'){
+                temp[0]--;
+            } else if(moves.charAt(i)=='U'){
+                temp[1]++;
+            } else{
+                temp[1]--;
+            }
+        }
+        return temp[0]==0 && temp[1]==0;
+    }
+}
+
+//5%
+class Solution {
+    public boolean judgeCircle(String moves) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        char ch = 'x';
+        for(int i=0;i<moves.length();i++){
+            ch = moves.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+
+        return map.getOrDefault('L', 0).equals(map.getOrDefault('R', 0)) &&
+           map.getOrDefault('U', 0).equals(map.getOrDefault('D', 0));
+    }
+}
+
+//96%
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int up = 0;
+        int left = 0;
+        for(char ch : moves.toCharArray()){
+            switch (ch){
+                case 'U':
+                    up++;
+                    break;
+                case 'D':
+                    up--;
+                    break;
+                case 'L':
+                    left++;
+                    break;
+                case 'R':
+                    left--;
+                    break;
+            }
+        }
+        return up==0 && left==0;
+    }
+}

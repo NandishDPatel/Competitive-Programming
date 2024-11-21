@@ -1,0 +1,17 @@
+//100% - 905
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int result[] = new int[nums.length];
+        int start = 0;
+        int end = nums.length-1;
+        int count = 0;
+        while(count<nums.length){
+            if(nums[count]%2==0){
+                result[start++] = nums[count++];
+            } else{
+                result[end--] = nums[count++];
+            }
+        }
+        return result;
+    }
+}

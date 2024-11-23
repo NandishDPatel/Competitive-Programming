@@ -1,0 +1,39 @@
+//645 - 32%
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        int sum = 0;
+        sum = ((nums.length)*(nums.length+1))/2; //10
+        int arrSum = 0; //9
+        int repeatNum = -1;       
+        for(int i=0;i<nums.length;i++){
+            arrSum += nums[i]; 
+            if(set.contains(nums[i])){
+                repeatNum = nums[i];
+            } else{
+                set.add(nums[i]);
+            }
+        }
+        int addNum = (sum-arrSum); 
+        return new int[]{repeatNum,repeatNum+addNum};
+    }
+}
+
+//84%
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int[] temp = new int[10001];
+        int repeatNum = -1;
+        int totalSum = 0;
+        int requiredSum = (nums.length)*(nums.length+1)/2;
+        for(int i=0;i<nums.length;i++){
+            totalSum += nums[i];
+            if(temp[nums[i]]==0){
+                temp[nums[i]]++;
+            } else{
+                repeatNum = nums[i];
+            }
+        }
+        return new int[]{repeatNum,repeatNum+(requiredSum-totalSum)};
+    }
+}

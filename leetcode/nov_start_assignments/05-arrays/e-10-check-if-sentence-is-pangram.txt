@@ -1,0 +1,16 @@
+//1832 - 86%
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+        int[] temp = new int[26];
+        //all lowercase chars
+        for(char ch:sentence.toCharArray()){
+            temp[(int)ch-97]++;
+        }
+        for(int i=0;i<temp.length;i++){
+            if(temp[i]==0){
+                return false;
+            }
+        }
+        return true;
+    }
+}

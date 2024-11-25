@@ -1,0 +1,19 @@
+//1773 - 89%
+class Solution {
+    public int countMatches(List<List<String>> items, String ruleKey, String ruleValue) {
+        int count = 0;
+        int check = 2;
+        if(ruleKey.equals("color")){
+            check = 1;
+        }
+        if(ruleKey.equals("type")){
+            check = 0;
+        }
+        for(int i=0;i<items.size();i++){
+            if(items.get(i).get(check).equals(ruleValue)){
+                count++;
+            }
+        }
+        return count;
+    }
+}

@@ -1,0 +1,18 @@
+//342 - 100%
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        if(n==0){
+            return false;
+        }
+        return powHelper(n);    
+    }
+    private boolean powHelper(int num){
+        if(num==1){
+            return true;
+        }
+        if(num%4!=0){
+            return false;
+        }
+        return powHelper(num/4);
+    }
+}

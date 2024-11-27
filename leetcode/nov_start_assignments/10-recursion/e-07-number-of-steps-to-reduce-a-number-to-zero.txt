@@ -1,0 +1,16 @@
+//1342 - 100%
+class Solution {
+    public int numberOfSteps(int num) {
+        return stepHelper(num,0);
+    }
+    private int stepHelper(int num,int count){
+        if(num==0){
+            return count;
+        }
+        count+=1;
+        if(num%2==0){
+            return stepHelper(num/2,count);
+        }
+        return stepHelper(num-1,count);
+    }
+}

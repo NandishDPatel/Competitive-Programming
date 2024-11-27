@@ -1,0 +1,22 @@
+//70 - 100%
+class Solution {
+    public int climbStairs(int n) {
+        if(n==1 || n==2){
+            return n;
+        }
+        int[] arr = new int[n];
+        arr[0] = 1;
+        arr[1] = 2;
+        return countSteps(n,arr);
+    }
+    private int countSteps(int num,int[] nums){
+        if(num==1 || num==2){
+            return num;
+        }
+        if(nums[num-1]!=0){
+            return nums[num-1]; 
+        }
+        nums[num-1] = countSteps(num-1,nums)+countSteps(num-2,nums);
+        return countSteps(num-1,nums)+countSteps(num-2,nums);
+    }
+}

@@ -1,0 +1,17 @@
+//344 - 24%
+class Solution {
+    public void reverseString(char[] s) {      
+        revHelper(s,0,s.length-1);
+    }
+    private char[] revHelper(char[] arr,int low,int high){
+        if(high<low){
+            return arr;
+        }
+        char temp = arr[low];
+        arr[low++] = arr[high];
+        arr[high--] = temp;
+         
+        return revHelper(arr,low,high);
+    }
+
+}

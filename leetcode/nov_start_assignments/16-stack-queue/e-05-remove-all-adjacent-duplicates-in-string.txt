@@ -1,0 +1,63 @@
+//1047 - 22%
+class Solution {
+    public String removeDuplicates(String s) {
+       Stack<Character> st = new Stack();
+       int current = 0;
+       char ch = 'X';
+       while(current<s.length()){
+        ch = s.charAt(current);
+        if(st.isEmpty()){
+            st.push(ch);
+        } else if(st.peek()==ch){
+            while(!st.isEmpty() && st.peek()==ch){
+                st.pop();
+            }
+        } else{
+            st.push(ch);
+        }
+        current++;
+       }
+       StringBuilder sb = new StringBuilder();
+       while(!st.isEmpty()){
+        sb.append(st.pop());
+       }
+       return (sb.reverse()).toString();
+    }
+
+}
+
+//42%
+class Solution {
+    public String removeDuplicates(String s) {
+       Stack<Character> st = new Stack();
+       for(char ch : s.toCharArray()){
+            if(!st.isEmpty() && st.peek()==ch){
+                st.pop();
+            } else{
+                st.push(ch);
+            }
+       }
+       StringBuilder sb = new StringBuilder();
+       while(!st.isEmpty()){
+        sb.append(st.pop());
+       }
+       return (sb.reverse()).toString();
+    }
+}
+
+//73%
+class Solution {
+    public String removeDuplicates(final String s) {
+        final StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < s.length(); ++i) {
+            if(sb.length() > 0 && sb.charAt(sb.length() - 1) == s.charAt(i)) {
+                sb.setLength(sb.length() - 1);
+            } else {
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
+}

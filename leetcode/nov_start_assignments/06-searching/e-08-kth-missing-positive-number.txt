@@ -1,0 +1,22 @@
+//1539 - 100%
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        if(arr[0]!=1 && k<arr[0]){
+            return k;
+        }
+        int missedPositive = 0;
+        missedPositive += arr[0]-1;
+        for(int i=0;i<arr.length-1;i++){
+            if(arr[i]+1!=arr[i+1]){
+                int prevMiss = missedPositive; //8
+                missedPositive += arr[i+1]-arr[i]-1; //18
+                if(missedPositive>=k){
+                    //ans lies here
+                    return arr[i]+(k-prevMiss);
+                }
+                //otherwise skip it
+            }
+        }
+        return arr[arr.length-1]+(k-missedPositive);
+    }
+}

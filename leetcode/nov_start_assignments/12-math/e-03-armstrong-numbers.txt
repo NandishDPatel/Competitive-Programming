@@ -1,0 +1,15 @@
+//GFG - solved
+// User function Template for Java
+class Solution {
+    static boolean armstrongNumber(int n) {
+        // code here
+        int org = n;
+        int sum = 0;
+        while(n>0){
+            int lastDig = n%10;
+            sum += lastDig*lastDig*lastDig;
+            n = n/10;
+        }
+        return sum==org;
+    }
+}

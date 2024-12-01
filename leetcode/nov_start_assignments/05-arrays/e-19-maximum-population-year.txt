@@ -1,0 +1,44 @@
+//1854 - 31%
+class Solution {
+    public int maximumPopulation(int[][] logs) {
+        int population[] = new int[101];
+        int maxPop = 0;
+        for(int i=0;i<logs.length;i++){
+            for(int j=logs[i][0];j<logs[i][1];j++){
+                population[j-1950]++;
+                if(population[j-1950]>maxPop){
+                    maxPop = population[j-1950];
+                }
+            }
+        }
+        for(int i=0;i<population.length;i++){
+            if(population[i]==maxPop){
+                return i+1950;
+            }
+        }
+        return -1;
+    }
+}
+
+//100%
+class Solution {
+    public int maximumPopulation(int[][] logs) {
+        int population[] = new int[101];
+        int maxPop = 0;
+        int year = 0;
+        for(int i=0;i<logs.length;i++){
+            population[logs[i][0]-1950]++;
+            population[logs[i][1]-1950]--;    
+        }
+        maxPop = population[0];
+        year = 1950;
+        for(int i=1;i<population.length;i++){
+            population[i] +=  population[i-1];
+            if(population[i]>maxPop){
+                maxPop = population[i];
+                year = i+1950;
+            }
+        }
+        return year;
+    }
+}

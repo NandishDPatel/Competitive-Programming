@@ -1,0 +1,26 @@
+//989 - 99%
+class Solution {
+ public List<Integer> addToArrayForm(int[] num, int k) {
+        LinkedList<Integer> output = new LinkedList<>();
+        int i = num.length - 1;
+        int carry = 0;
+        
+        // Process both the number in array form and the integer k
+        while (k > 0 || carry > 0) {
+            int tmp = carry + k % 10;
+            if (i >= 0) {
+                tmp += num[i--];
+            }
+            output.addFirst(tmp % 10);
+            carry = tmp / 10;
+            k /= 10;
+        }
+        
+        // Add remaining digits from num array
+        while (i >= 0) {
+            output.addFirst(num[i--]);
+        }
+        
+        return output;
+    }
+}

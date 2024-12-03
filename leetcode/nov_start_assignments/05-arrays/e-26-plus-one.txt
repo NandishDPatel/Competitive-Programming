@@ -1,0 +1,27 @@
+//66 - 100%
+class Solution {
+    public int[] plusOne(int[] digits) {
+        StringBuilder sb = new StringBuilder();
+        int carry = 1;
+        int curr = 0;
+        for(int i=digits.length-1;i>=0;i--){
+            curr = digits[i]+carry;
+            if(curr>=10){
+                carry = 1;
+                sb.append(curr%10);
+            } else{
+                carry = 0;
+                sb.append(curr);
+            }
+        }
+        if(carry==1){
+            sb.append(1);
+        }
+        String temp = (sb.reverse()).toString();
+        int result[] = new int[sb.length()];
+        for(int j=0;j<result.length;j++){
+            result[j] = temp.charAt(j)-48;
+        }
+        return result;
+    }
+}

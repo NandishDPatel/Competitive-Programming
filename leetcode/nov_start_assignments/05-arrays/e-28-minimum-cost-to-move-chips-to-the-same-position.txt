@@ -1,0 +1,19 @@
+//1217 - 100%
+class Solution {
+    public int minCostToMoveChips(int[] position) {
+        int tOdds = 0;
+        int tEves = 0;
+        for(int i=0;i<position.length;i++){
+            if(position[i]%2==0){
+                tEves++;
+            } else{
+                tOdds++;
+            }
+        }
+        if(tEves>=tOdds){
+            return tOdds;
+        } 
+        return tEves;
+
+    }
+}

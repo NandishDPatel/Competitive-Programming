@@ -1,0 +1,72 @@
+//888 - 24%
+class Solution {
+    public int[] fairCandySwap(int[] aliceSizes, int[] bobSizes) {
+        Arrays.sort(aliceSizes);
+        Arrays.sort(bobSizes);
+        int tot1 = 0;
+        int tot2 = 0;
+        for(int i=0;i<aliceSizes.length;i++){
+            tot1 += aliceSizes[i];
+        }
+        for(int j=0;j<bobSizes.length;j++){
+            tot2 += bobSizes[j];
+        }
+        System.out.println("Tot1 - "+tot1+"Tot2 - "+tot2);
+        boolean oneHasExtra = true;
+        int diff = 0;
+        if(tot2>tot1){
+            oneHasExtra = false;
+            diff = tot2-tot1;
+        } else{
+            diff = tot1-tot2;
+        }
+        int i = 0;
+        int j = 0;
+        if(oneHasExtra){
+            while(i<aliceSizes.length && j<bobSizes.length){
+                if(2*(aliceSizes[i]-bobSizes[j])==diff){
+                    return new int[]{aliceSizes[i],bobSizes[j]};
+                } else if(2*(aliceSizes[i]-bobSizes[j])>diff){
+                    j++;
+                } else{
+                    i++;
+                }
+        }
+        } else{
+            while(i<aliceSizes.length && j<bobSizes.length){
+                if(2*(bobSizes[j]-aliceSizes[i])==diff){
+                    return new int[]{aliceSizes[i],bobSizes[j]};
+                } else if(2*(bobSizes[j]-aliceSizes[i])>diff){
+                    i++;
+                } else{
+                    j++;
+                }
+        }
+        }
+        return new int[]{-1,-1};
+    }
+}
+
+//97% - chatgpt
+class Solution {
+    public int[] fairCandySwap(int[] A, int[] B) {
+        // Calculate the sum of both arrays
+        int sumA = 0, sumB = 0;
+        for (int x : A) sumA += x;
+        for (int y : B) sumB += y;
+        
+        int delta = (sumA - sumB) / 2;
+        
+        Set<Integer> setB = new HashSet<>();
+        for (int y : B) setB.add(y);
+        
+        for (int x : A) {
+            int y = x - delta;
+            if (setB.contains(y)) {
+                return new int[] {x, y};
+            }
+        }
+        
+        return new int[0];
+    }
+}

@@ -1,0 +1,40 @@
+//414 - 67%
+class Solution {
+    public int thirdMax(int[] nums) {
+        Arrays.sort(nums);
+        int count = 1;
+        for(int i=nums.length-1;i>0;i--){
+            if(nums[i]!=nums[i-1]){
+                count++;
+                if(count==3){
+                    return nums[i-1];
+                }
+            }
+        }
+        return nums[nums.length-1];
+    }
+}
+
+//83%
+class Solution {
+    public int thirdMax(int[] nums) {
+        Integer a3 = null, a2 = null, a1 = null;
+
+        for (int num : nums) {
+            if ((a3 != null && num == a3) || (a2 != null && num == a2) || (a1 != null && num == a1)) {
+                continue;
+            }
+            if (a3 == null || num > a3) {
+                a1 = a2;
+                a2 = a3;
+                a3 = num;
+            } else if (a2 == null || num > a2) {
+                a1 = a2;
+                a2 = num;
+            } else if (a1 == null || num > a1) {
+                a1 = num;
+            }
+        }
+        return a1 != null ? a1 : a3;
+    }
+}

@@ -1,0 +1,41 @@
+//1662 - 16%
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        for(int i=0;i<word1.length;i++){
+            sb1.append(word1[i]);
+        }
+        for(int i=0;i<word2.length;i++){
+            sb2.append(word2[i]);
+        }
+        String temp1 = sb1.toString();
+        String temp2 = sb2.toString();
+        if(temp1.length()!=temp2.length()){
+            return false;
+        }
+        // boolean ans = true;
+        for(int i=0;i<temp1.length();i++){
+            if(temp1.charAt(i)!=temp2.charAt(i)){
+                return false;
+            }
+        }   
+        return true;
+
+    }
+}
+
+//100%
+class Solution {
+     public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+        for(int i=0;i<word1.length;i++){
+            sb1.append(word1[i]);
+        }
+        for(int i=0;i<word2.length;i++){
+            sb2.append(word2[i]);
+        }
+        return sb1.toString().equals(sb2.toString());
+    }
+}

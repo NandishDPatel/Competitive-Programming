@@ -1,0 +1,73 @@
+//1859 - 48%
+class Solution {
+    public String sortSentence(String s) {
+        HashMap<Integer,String> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        int ind = 0;
+        String temp = "";
+        int count = 0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                temp = sb.toString();
+                ind = (temp.charAt(temp.length()-1)) - 48;
+                temp = temp.substring(0,temp.length()-1);
+                map.put(ind,temp);
+                sb.setLength(0);
+                count++;
+            } else if(i == s.length()-1){
+                temp = sb.toString();
+                ind = (s.charAt(i)) - 48;
+                map.put(ind,temp);
+                sb.setLength(0);
+                count++;
+            }else{
+                sb.append(s.charAt(i));
+            }
+        }
+        for(int j=1;j<count;j++){
+            sb.append(map.get(j));
+            sb.append(" ");
+        }
+        sb.append(map.get(count));
+        return sb.toString();
+    }
+}
+
+//100%
+class Solution {
+    public String sortSentence(String s) {
+        String[] strArr = new String[10];
+        StringBuilder sb = new StringBuilder();
+        int ind = 0;
+        String temp = "";
+        int count = 0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                temp = sb.toString();
+                ind = (temp.charAt(temp.length()-1)) - 48;
+                temp = temp.substring(0,temp.length()-1);
+                strArr[ind] = temp;
+                sb.setLength(0);
+                count++;
+            } else if(i == s.length()-1){
+                temp = sb.toString();
+                ind = (s.charAt(i)) - 48;
+                strArr[ind] = temp;
+                sb.setLength(0);
+                count++;
+            }else{
+                sb.append(s.charAt(i));
+            }
+        }
+        for(int i=1;i<count;i++){
+            if(strArr[i]!="" && i!=count){
+                sb.append(strArr[i]);
+                sb.append(" ");
+            } else {
+                break;
+            }
+        }
+        sb.append(strArr[count]);
+        return sb.toString();
+    }
+}

@@ -1,0 +1,83 @@
+//733 - 44%
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        
+        Stack<Integer> x = new Stack<>();
+        Stack<Integer> y = new Stack<>();
+        x.push(sr);
+        y.push(sc);
+        int newColor = 0;
+        int xCord = x.peek();
+        int yCord = y.peek();    
+        int prevColor = image[xCord][yCord];
+        if (prevColor == color) return image;
+        while(!x.isEmpty()){
+            xCord = x.peek();
+            yCord = y.peek();
+            image[xCord][yCord] = color;
+            x.pop();
+            y.pop();
+            if(xCord!=0 && image[xCord-1][yCord]==prevColor){
+                image[xCord-1][yCord] = color;
+                x.push(xCord-1);
+                y.push(yCord);
+            } 
+            if(yCord!=0 && image[xCord][yCord-1]==prevColor){
+                image[xCord][yCord-1] = color;
+                x.push(xCord);
+                y.push(yCord-1);
+            } 
+            if(xCord!=image.length-1 && image[xCord+1][yCord]==prevColor){
+                image[xCord+1][yCord] = color;
+                x.push(xCord+1);
+                y.push(yCord);
+            } 
+            if(yCord!=image[0].length-1 && image[xCord][yCord+1]==prevColor){
+                image[xCord][yCord+1] = color;
+                x.push(xCord);
+                y.push(yCord+1);
+            }
+        }
+        return image;
+   }
+}
+
+//using queue and BFS - same 44%
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int prevColor = image[sr][sc];
+        if (prevColor == color) return image; // If the color is the same, no need to process
+
+        int rows = image.length;
+        int cols = image[0].length;
+
+        // Direction arrays for moving up, down, left, right
+        int[] dirX = {-1, 1, 0, 0};
+        int[] dirY = {0, 0, -1, 1};
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{sr, sc});
+
+        while (!queue.isEmpty()) {
+            int[] pixel = queue.poll();
+            int x = pixel[0];
+            int y = pixel[1];
+
+            // Change the color of the current pixel
+            image[x][y] = color;
+
+            // Traverse in all 4 directions
+            for (int i = 0; i < 4; i++) {
+                int newX = x + dirX[i];
+                int newY = y + dirY[i];
+
+                // Check if the new position is within bounds and matches prevColor
+                if (newX >= 0 && newX < rows && newY >= 0 && newY < cols && image[newX][newY] == prevColor) {
+                    queue.add(new int[]{newX, newY});
+                }
+            }
+        }
+
+        return image;
+    }
+}

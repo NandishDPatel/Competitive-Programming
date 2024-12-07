@@ -1,0 +1,57 @@
+//1021 - 39%
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder sb = new StringBuilder();
+        Stack<Character> stack = new Stack<>();
+        int i = 0;
+        char ch = 'x';
+        while(i<s.length()){
+            ch = s.charAt(i);
+            if(stack.isEmpty()){
+                stack.push(ch);
+                i++;
+            } else{
+                if(ch==')'){
+                    stack.pop();
+                    if(!stack.isEmpty()){
+                        sb.append(ch);
+                    }
+                    i++;
+                } else if(s.charAt(i+1)=='('){
+                    sb.append('(');
+                    stack.push('(');
+                    i++;
+                } else{
+                    sb.append("()");
+                    i+=2;
+                }
+            }
+        }
+        return sb.toString();
+    
+    }
+}
+
+//same approach but using array - 98%
+class Solution {
+    public String removeOuterParentheses(String s) {
+        StringBuilder ans = new StringBuilder();
+        char[] a = s.toCharArray();
+        int n = a.length;
+        int count = 0;
+        for (int i = 1; i < n; i++) {
+            if (a[i] == '(') {
+                count++;
+                ans.append('(');
+            } else {
+                if (count == 0) {
+                    i++;
+                } else {
+                    ans.append(')');
+                    count--;
+                }
+            }
+        }
+        return ans.toString();
+    }
+}

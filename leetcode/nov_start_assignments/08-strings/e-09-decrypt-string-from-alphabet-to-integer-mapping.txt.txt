@@ -1,0 +1,25 @@
+//1309 - 76%
+class Solution {
+    public String freqAlphabets(String s) {
+       int i = 0;
+       StringBuilder sb = new StringBuilder();
+       while(i<s.length()-2){
+            if(s.charAt(i+2)=='#'){
+                int firstDig = s.charAt(i)-48;
+                int secondDig = s.charAt(i+1)-48;
+                int digit = firstDig*10 + secondDig + 96;
+                sb.append((char)digit);  
+                i+=3;
+            } else{
+                sb.append((char)(s.charAt(i)-49+97));
+                i++;
+            }
+       }
+       while(i<s.length()){
+        sb.append((char)(s.charAt(i)-48+96));
+        System.out.println((char)(s.charAt(i)-48+96));
+        i++;
+       }
+       return sb.toString();
+    }
+}

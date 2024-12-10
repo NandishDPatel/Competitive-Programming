@@ -56,7 +56,7 @@ public class Solution {
         while(temp1.next!=temp2.next && temp1!=null && temp2!=null){
             temp1 = temp1.next;
             temp2 = temp2.next;
-        }
+         }
         // System.out.println(temp1.val);
         // System.out.println(temp2.val);
         

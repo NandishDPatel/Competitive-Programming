@@ -1,0 +1,19 @@
+//1967 - 9%
+class Solution {
+    public int numOfStrings(String[] patterns, String word) {
+        int count = 0;
+        String temp = "";
+        String check = "";
+        for(int i=0;i<patterns.length;i++){
+            temp = patterns[i];
+            for(int j=0;j<word.length()-temp.length()+1;j++){
+                check = word.substring(j,j+temp.length());
+                if(temp.equals(check)){
+                    count++;
+                    break;
+                }
+            }
+        }   
+        return count;   
+    }
+}

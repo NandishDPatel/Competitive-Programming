@@ -1,0 +1,21 @@
+//49%
+class Solution {
+    public String reverseWords(String s) {
+        StringBuilder temp = new StringBuilder();
+        StringBuilder ans = new StringBuilder();
+        char[] arr = s.toCharArray();
+        String addStr = "";
+        for(char ch: arr){
+            if(ch==' '){
+                ans.append((temp.reverse()).toString());
+                ans.append(" ");
+                temp.setLength(0);
+                continue; 
+            } else{
+                temp.append(ch);
+            }
+        }
+        ans.append((temp.reverse()).toString());
+        return ans.toString();
+    }
+}

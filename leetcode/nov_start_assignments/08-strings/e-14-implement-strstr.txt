@@ -1,0 +1,16 @@
+//28 - 100%
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int result = 0;
+        int count = 0;
+        int ln = needle.length();
+        String temp = "";
+        for(int i=0;i<haystack.length()-ln+1;i++){
+            temp = haystack.substring(i,i+ln);
+            if(temp.equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}

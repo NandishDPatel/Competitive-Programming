@@ -1,0 +1,26 @@
+//680 - 97%
+class Solution {
+    public boolean validPalindrome(String s) {
+        int i = 0;
+        int j = s.length()-1;
+        while(i<j){
+            if(s.charAt(i)!=s.charAt(j)){
+                break;
+            }
+            i++;
+            j--;      
+        }
+        return checkPali(i+1,j,s) || checkPali(i,j-1,s);
+    }
+    private boolean checkPali(int a,int b,String s){
+        while(a<=b){
+            if(s.charAt(a)==s.charAt(b)){
+                a++;
+                b--;
+            } else{
+                return false;
+            }
+        }
+        return true;
+    }
+}

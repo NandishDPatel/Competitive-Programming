@@ -1,0 +1,20 @@
+//2000 - 52%
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        boolean firstOccur = false;
+        for(char temp : word.toCharArray()){
+            if(temp==ch && !firstOccur){
+                sb.append(temp);
+                result.append(sb.reverse().toString());
+                firstOccur = true;
+                sb.setLength(0);
+            } else{
+                sb.append(temp);
+            }
+        }
+        result.append(sb.toString());
+        return result.toString();
+    }
+}

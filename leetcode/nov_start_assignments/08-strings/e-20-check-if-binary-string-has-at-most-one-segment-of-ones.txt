@@ -1,0 +1,16 @@
+//1784 - 100%
+class Solution {
+    public boolean checkOnesSegment(String s) {
+        int count = 0;
+        char prev = '1';
+        int i = 1;
+        boolean ans = false;
+        while(i<s.length() && s.charAt(i)=='1'){
+            i++; 
+        }
+        while(i<s.length() && s.charAt(i)=='0'){
+            i++;
+        }
+        return (i==s.length()) ? true : false;
+    }
+}

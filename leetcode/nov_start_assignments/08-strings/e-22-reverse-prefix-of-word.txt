@@ -18,3 +18,39 @@ class Solution {
         return result.toString();
     }
 }
+
+//same - 52%
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        StringBuilder result = new StringBuilder();
+        boolean firstOccur = false;
+        int i = 0;
+        int revPoint = 0;
+        while(i<word.length()){
+            if(word.charAt(i)!=ch){
+                i++;
+            } else{
+                break;
+            }
+        }
+        if(i==word.length()){
+            revPoint = 0;
+            while(revPoint<word.length()){
+                result.append(word.charAt(revPoint));
+                revPoint++;
+            }
+            return result.toString();
+        }
+        revPoint = i;
+        while(revPoint>=0){
+            result.append(word.charAt(revPoint));
+            revPoint--;
+        }
+        i++;
+        while(i<word.length()){
+            result.append(word.charAt(i));
+            i++;
+        }
+        return result.toString();
+    }
+}
